@@ -19,7 +19,7 @@
                 android:layout_height="wrap_content"
                 android:text="
             Hola usuario\nEs hora de su medicamento"
-                android:textSize="29sp"
+                android:textSize="28sp"
                 android:textColor="@color/black"
                 android:layout_centerInParent="true"/>
         </RelativeLayout>
