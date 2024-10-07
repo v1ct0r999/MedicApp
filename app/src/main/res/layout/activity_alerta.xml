@@ -17,9 +17,9 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="
-            Hola usuario\nEs hora de su medicamento"
-                android:textSize="29sp"
+                android:text="!!Hola usuario \nEs hora de su medicamento¡¡"
+                android:textAlignment="center"
+                android:textSize="28sp"
                 android:textColor="@color/black"
                 android:layout_centerInParent="true"/>
         </RelativeLayout>
@@ -56,7 +56,7 @@
                     android:id="@+id/textViewAlarma"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Alarma activada"
+                    android:text="!Alarma activada¡"
                     android:textSize="30sp"
                     android:textColor="@color/black"
                     android:layout_centerInParent="true"/>
@@ -115,10 +115,9 @@
 
                 <Button
                     android:id="@+id/btnStopAlarm"
-                    android:layout_width="279dp"
-                    android:layout_height="73dp"
+                    android:layout_width="280dp"
+                    android:layout_height="70dp"
                     android:layout_centerInParent="true"
-                    android:layout_marginTop="10dp"
                     android:backgroundTint="@color/rojo"
                     android:text="Detener Alarma"
                     android:textColor="@color/white"

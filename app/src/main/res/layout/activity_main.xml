@@ -220,18 +220,21 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="7">
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
-                <Button
+
+                <ImageButton
                     android:id="@+id/botonemergencia"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="30dp"
-                    android:text="+"
+                    android:layout_width="185px"
+                    android:layout_height="185px"
                     android:layout_centerInParent="true"
-                    android:backgroundTint="@color/azul"/>
+                    android:background="@drawable/alarma"
+                    />
+
             </RelativeLayout>
+
         </LinearLayout>
     </LinearLayout>
 
