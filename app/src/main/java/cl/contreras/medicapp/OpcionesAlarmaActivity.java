@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -66,6 +68,10 @@ public class OpcionesAlarmaActivity extends AppCompatActivity {
     }
     private void eliminarAlarma(String alarmaNombre) {
         DatabaseHelper databaseHelper = new DatabaseHelper(this);
+
+        // Cancela la alarma en el sistema antes de eliminarla de la base de datos
+        cancelarAlarma(alarmaNombre);
+
         boolean result = databaseHelper.eliminarAlarma(alarmaNombre);
 
         if (result) {
@@ -77,5 +83,18 @@ public class OpcionesAlarmaActivity extends AppCompatActivity {
         Intent intent = new Intent(OpcionesAlarmaActivity.this, MainActivity.class);
         startActivity(intent);
         finish(); // Cierra esta actividad
+    }
+
+    // Método para cancelar la alarma en AlarmManager
+    private void cancelarAlarma(String alarmaNombre) {
+        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+        Intent intent = new Intent(OpcionesAlarmaActivity.this, ReminderBroadcastReceiver.class);
+        intent.putExtra("nombre_alarma", alarmaNombre);
+
+        // El mismo PendingIntent con el que se programó la alarma
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        // Cancelar la alarma
+        alarmManager.cancel(pendingIntent);
     }
 }
