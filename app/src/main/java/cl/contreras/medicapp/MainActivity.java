@@ -1,6 +1,7 @@
 package cl.contreras.medicapp;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
@@ -10,15 +11,15 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 
 public class MainActivity extends AppCompatActivity {
 
     private static final int REQUEST_PERMISSION_CODE = 100;
     DatabaseHelper dbHelper;
     LinearLayout alarmaLayout;
+    Button buttonEditDosis, buttonEditFrecuencia, buttonEditStock;
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         dbHelper = new DatabaseHelper(this);
-        alarmaLayout = findViewById(R.id.alarmaLayout); // Asegúrate de haber cambiado el layout en activity_main.xml
+        alarmaLayout = findViewById(R.id.alarmaLayout);
         Button btnAddAlarma = findViewById(R.id.btnAddAlarma);
 
         btnAddAlarma.setOnClickListener(v -> {
@@ -40,7 +41,31 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
-        loadAlarmas();
+        // Enlazar los botones de edición
+        buttonEditDosis = findViewById(R.id.buttonAceptarDosis);
+        buttonEditFrecuencia = findViewById(R.id.buttonAceptarFrecuencia);
+        buttonEditStock = findViewById(R.id.buttonAceptarStock);
+
+
+        // Navegar a EditDosisActivity al hacer clic en el botón de Editar Dosis
+        buttonEditDosis.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, EditDosisActivity.class);
+            startActivity(intent);
+        });
+
+        // Navegar a EditFrecuenciaActivity al hacer clic en el botón de Editar Frecuencia
+        buttonEditFrecuencia.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, activity_edit_frecuencia.class);
+            startActivity(intent);
+        });
+
+        // Navegar a EditStockActivity al hacer clic en el botón de Editar Stock
+        buttonEditStock.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, activity_edit_stock.class);
+            startActivity(intent);
+        });
+
+        loadAlarmas(); // Cargar las alarmas desde la base de datos
     }
 
     private void loadAlarmas() {
@@ -53,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
 
                 // Crear un nuevo botón grande
                 Button alarmaButton = new Button(this);
-                alarmaButton.setText("Nombre Alarma\n"+ nombre +"\n\nVer detalles");
+                alarmaButton.setText("Nombre Alarma\n" + nombre + "\n\nVer detalles");
                 alarmaButton.setLayoutParams(new LinearLayout.LayoutParams(
                         LinearLayout.LayoutParams.MATCH_PARENT,
                         400

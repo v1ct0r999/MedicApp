@@ -28,7 +28,9 @@
 
     </LinearLayout>
 
-    <!--opciones clandario contacto notificaciones-->
+
+
+    <!--opciones calendario contacto notificaciones-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
