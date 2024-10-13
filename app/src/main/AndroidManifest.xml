@@ -15,6 +15,18 @@
         android:theme="@style/Theme.MedicApp"
         tools:targetApi="31">
         <activity
+            android:name=".EditarContactoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".EliminarContactoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AgregarContactoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".EditarDosisActivity"
+            android:exported="false" />
+        <activity
             android:name=".MenuContactoActivity"
             android:exported="false" />
         <activity
