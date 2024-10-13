@@ -15,7 +15,6 @@ import androidx.core.content.ContextCompat;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final int REQUEST_PERMISSION_CODE = 100;
     DatabaseHelper dbHelper;
     LinearLayout alarmaLayout;
 
@@ -24,15 +23,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Verificar y solicitar permiso de notificaciones
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            if (checkSelfPermission(Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
-                requestPermissions(new String[]{Manifest.permission.POST_NOTIFICATIONS}, REQUEST_PERMISSION_CODE);
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.POST_NOTIFICATIONS}, 1);
             }
         }
 
         dbHelper = new DatabaseHelper(this);
-        alarmaLayout = findViewById(R.id.alarmaLayout); // Asegúrate de haber cambiado el layout en activity_main.xml
+        alarmaLayout = findViewById(R.id.alarmaLayout);
         Button btnAddAlarma = findViewById(R.id.btnAddAlarma);
 
         btnAddAlarma.setOnClickListener(v -> {
@@ -49,11 +47,12 @@ public class MainActivity extends AppCompatActivity {
 
         if (cursor.moveToFirst()) {
             do {
+                int id = cursor.getInt(0);  // Obtener ID de la alarma
                 String nombre = cursor.getString(1);
 
                 // Crear un nuevo botón grande
                 Button alarmaButton = new Button(this);
-                alarmaButton.setText("Nombre Alarma\n"+ nombre +"\n\nVer detalles");
+                alarmaButton.setText("Nombre Alarma\n" + nombre + "\n\nVer detalles");
                 alarmaButton.setLayoutParams(new LinearLayout.LayoutParams(
                         LinearLayout.LayoutParams.MATCH_PARENT,
                         400
@@ -63,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
 
                 alarmaButton.setOnClickListener(v -> {
                     Intent intent = new Intent(MainActivity.this, OpcionesAlarmaActivity.class);
-                    intent.putExtra("alarma_nombre", nombre); // Enviar el nombre de la alarma si es necesario
+                    intent.putExtra("alarma_id", id);  // Enviar el ID de la alarma
                     startActivity(intent);
                 });
 
@@ -81,16 +80,5 @@ public class MainActivity extends AppCompatActivity {
         loadAlarmas(); // Recargar la lista cuando regrese a la actividad principal
     }
 
-    // Gestión del resultado del permiso
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == REQUEST_PERMISSION_CODE) {
-            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                Toast.makeText(this, "Permisos de notificación concedidos", Toast.LENGTH_SHORT).show();
-            } else {
-                Toast.makeText(this, "Permisos de notificación denegados", Toast.LENGTH_SHORT).show();
-            }
-        }
-    }
 }
+

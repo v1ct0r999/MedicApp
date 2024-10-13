@@ -14,30 +14,37 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MedicApp"
         tools:targetApi="31">
+
+        <activity
+        android:name=".AddAlarmaActivity"
+        android:exported="false" />
+
+        <activity
+        android:name=".AgregarContactoActivity"
+        android:exported="false" />
+
+        <activity
+        android:name=".AlertaActivity"
+        android:exported="false" />
+
         <activity
             android:name=".EditarContactoActivity"
             android:exported="false" />
         <activity
             android:name=".EliminarContactoActivity"
             android:exported="false" />
-        <activity
-            android:name=".AgregarContactoActivity"
-            android:exported="false" />
+
         <activity
             android:name=".EditarDosisActivity"
             android:exported="false" />
         <activity
             android:name=".MenuContactoActivity"
             android:exported="false" />
-        <activity
-            android:name=".AlertaActivity"
-            android:exported="false" />
+
         <activity
             android:name=".OpcionesAlarmaActivity"
             android:exported="false" />
-        <activity
-            android:name=".AddAlarmaActivity"
-            android:exported="false" />
+
         <activity
             android:name=".MainActivity"
             android:exported="true">

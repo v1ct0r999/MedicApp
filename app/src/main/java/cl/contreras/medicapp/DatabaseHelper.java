@@ -45,7 +45,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(COLUMN_NOMBRE, nombre);
         values.put(COLUMN_DOSIS, dosis);
         values.put(COLUMN_STOCK, stock);
-        values.put(COLUMN_FRECUENCIA, frecuencia);  // Guardando la frecuencia
+        values.put(COLUMN_FRECUENCIA, frecuencia);
         long result = db.insert(TABLE_NAME, null, values);
         return result != -1;
     }
@@ -55,8 +55,23 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return db.rawQuery("SELECT * FROM " + TABLE_NAME, null);
     }
 
-    public boolean eliminarAlarma(String nombre) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        return db.delete(TABLE_NAME, COLUMN_NOMBRE + " = ?", new String[]{nombre}) > 0;
+
+    public int getLastInsertedId() {
+        int lastId = -1;
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT last_insert_rowid()", null);
+        if (cursor != null) {
+            cursor.moveToFirst();
+            lastId = cursor.getInt(0);
+            cursor.close();
+        }
+        return lastId;
     }
+
+
+    public boolean eliminarAlarma(int id) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        return db.delete(TABLE_NAME, COLUMN_ID + " = ?", new String[]{String.valueOf(id)}) > 0;
+    }
+
 }
