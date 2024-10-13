@@ -103,7 +103,7 @@
                     android:layout_height="match_parent">
 
                     <ImageButton
-                        android:id="@+id/agregarcontacto"
+                        android:id="@+id/opcionesnotificaciones"
                         android:layout_width="185px"
                         android:layout_height="185px"
                         android:layout_centerInParent="true"
@@ -156,7 +156,7 @@
                     android:layout_height="match_parent">
 
                     <ImageButton
-                        android:id="@+id/opcionesnotificacion"
+                        android:id="@+id/agregarcontacto"
                         android:layout_width="185px"
                         android:layout_height="185px"
                         android:layout_centerInParent="true"

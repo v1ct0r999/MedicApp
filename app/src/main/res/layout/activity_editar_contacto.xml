@@ -179,31 +179,7 @@
 
     </LinearLayout>
 
-    <!-- BOTON APELLIDO -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:layout_weight="1">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <Button
-                android:id="@+id/btnEditarApellidoContacto"
-                android:layout_width="250dp"
-                android:layout_height="80dp"
-                android:layout_centerInParent="true"
-                android:layout_marginBottom="16dp"
-                android:text="Editar Apellido"
-                android:textSize="25dp"
-                android:textStyle="bold"
-                android:textColor="@android:color/black"
-                android:backgroundTint="@color/cyan"/>
-        </RelativeLayout>
-
-    </LinearLayout>
 
     <!-- BOTON NUMERO -->
     <LinearLayout

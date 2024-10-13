@@ -6,7 +6,9 @@ import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
@@ -39,6 +41,15 @@ public class MainActivity extends AppCompatActivity {
         });
 
         loadAlarmas();
+
+        ImageButton botonContacto = (ImageButton) findViewById(R.id.agregarcontacto);
+
+        botonContacto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, MenuContactoActivity.class));
+            }
+        });
     }
 
     private void loadAlarmas() {

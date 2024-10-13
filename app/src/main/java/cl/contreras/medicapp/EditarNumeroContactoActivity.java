@@ -11,22 +11,23 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-public class AgregarContactoActivity extends AppCompatActivity {
+public class EditarNumeroContactoActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_agregar_contacto);
+        setContentView(R.layout.activity_editar_numero_contacto);
 
-        Button botonVolverAgregarContacto = (Button) findViewById(R.id.btnVolverAgregarContacto);
+        Button botonVolverEditarNumeroContacto = (Button) findViewById(R.id.btnVolverEditarNumeroContacto);
 
-        // Volver al menu contaco
-        botonVolverAgregarContacto.setOnClickListener(new View.OnClickListener() {
+        // Volver al Menu
+        botonVolverEditarNumeroContacto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(AgregarContactoActivity.this, MenuContactoActivity.class));
+                startActivity(new Intent(EditarNumeroContactoActivity.this, EditarContactoActivity.class));
             }
         });
+
     }
 }

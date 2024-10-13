@@ -28,6 +28,15 @@
         android:exported="false" />
 
         <activity
+            android:name=".EditarNumeroContactoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".EditarFonoContactoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".EditarNombreContactoActivity"
+            android:exported="false" />
+        <activity
             android:name=".EditarContactoActivity"
             android:exported="false" />
         <activity
