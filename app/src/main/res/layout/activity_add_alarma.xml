@@ -25,6 +25,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Agregar Alarma"
+                android:textColor="@color/black"
                 android:textSize="40dp"
                 android:textStyle="bold"
                 android:textAlignment="center"
@@ -59,6 +60,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Nombre Medicamento"
+                    android:textColor="@color/black"
                     android:textStyle="italic"
                     android:textSize="20dp"
                     android:layout_centerInParent="true">
@@ -114,6 +116,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Dosis del Medicamento"
+                    android:textColor="@color/black"
                     android:textStyle="italic"
                     android:textSize="20dp"
                     android:layout_centerInParent="true">
@@ -174,6 +177,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Stock del medicamento"
+                        android:textColor="@color/black"
                         android:textStyle="italic"
                         android:textSize="20dp"
                         android:layout_centerInParent="true">
@@ -230,6 +234,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Frecuencia del Medicamento"
+                    android:textColor="@color/black"
                     android:textStyle="italic"
                     android:textSize="20dp"
                     android:layout_centerInParent="true">
@@ -284,6 +289,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Guardar"
+                    android:textColor="@color/white"
                     android:textStyle="bold"
                     android:textSize="30dp"
                     android:layout_centerInParent="true" />
@@ -307,6 +313,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Cancelar"
+                    android:textColor="@color/white"
                     android:textStyle="bold"
                     android:textSize="30dp"
                     android:layout_centerInParent="true" />

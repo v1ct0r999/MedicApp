@@ -23,6 +23,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="HOLA!!"
+                android:textColor="@color/black"
                 android:layout_alignParentBottom="true"
                 android:layout_centerInParent="true"
                 android:textSize="50dp">
@@ -42,6 +43,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Bienvenido a tu aplicación de alertas médicas"
+                android:textColor="@color/black"
                 android:textAlignment="center"
                 android:textSize="30dp">
 
@@ -60,6 +62,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="¿Cómo te llamas?"
+                android:textColor="@color/black"
                 android:textSize="30dp"
                 android:layout_alignParentBottom="true">
 

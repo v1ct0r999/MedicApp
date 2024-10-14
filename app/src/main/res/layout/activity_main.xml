@@ -21,6 +21,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Buenos días"
+                android:textColor="@color/black"
                 android:textSize="30dp">
 
             </TextView>
@@ -77,6 +78,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Ver \nCalendario"
+                        android:textColor="@color/black"
                         android:textAlignment="center"
                         android:layout_centerInParent="true">
                     </TextView>
@@ -127,6 +129,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Ajuste \nnotificaciones"
+                        android:textColor="@color/black"
                         android:textAlignment="center"
                         android:layout_alignParentBottom="true"
                         android:layout_centerInParent="true">
@@ -181,6 +184,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Contacto \nEmergencia"
+                        android:textColor="@color/black"
                         android:textAlignment="center"
                         android:layout_alignParentBottom="true"
                         android:layout_centerInParent="true">
