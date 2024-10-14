@@ -85,7 +85,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
-                    android:hint="Nombre del medicamento" />
+                    android:hint="Nombre del medicamento"
+                    android:textColor="@color/black"/>
 
             </RelativeLayout>
 
@@ -141,7 +142,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Dosis recetada"
-                    android:inputType=""/>
+                    android:inputType=""
+                    android:textColor="@color/black"/>
 
             </RelativeLayout>
 
@@ -202,7 +204,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Cantidad total (stock)"
-                        android:inputType="" />
+                        android:inputType=""
+                        android:textColor="@color/black"/>
 
 
                 </RelativeLayout>
@@ -259,7 +262,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Frecuencia (horas)"
-                    android:inputType="date"/>
+                    android:inputType="date"
+                    android:textColor="@color/black"/>
 
             </RelativeLayout>
 

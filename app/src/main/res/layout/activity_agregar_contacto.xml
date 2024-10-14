@@ -81,7 +81,8 @@
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
                     android:textSize="20dp"
-                    android:hint="Nombre y apelliddel Contacto" />
+                    android:hint="Nombre y apelliddel Contacto"
+                    android:textColor="@color/black"/>
 
             </RelativeLayout>
 
@@ -137,7 +138,8 @@
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
                     android:textSize="20dp"
-                    android:hint="ejemplo: +56911112222" />
+                    android:hint="ejemplo: +56911112222"
+                    android:textColor="@color/black"/>
 
             </RelativeLayout>
 
