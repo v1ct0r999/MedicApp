@@ -1,0 +1,71 @@
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:gravity="center"
+    android:background="@drawable/fondo">
+
+    <!-- Texto que muestra el stock actual -->
+    <TextView
+        android:id="@+id/textViewStockActual"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Antes el stock era"
+        android:textSize="18sp"
+        android:layout_marginBottom="8dp" />
+
+    <!-- Stock anterior (puedes cambiar el valor dinámicamente en Java/Kotlin) -->
+    <TextView
+        android:id="@+id/textViewStockValor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Stock: 30 "
+        android:textSize="16sp"
+        android:layout_marginBottom="16dp" />
+
+    <!-- Campo para ingresar el nuevo stock -->
+    <TextView
+        android:id="@+id/textViewIngresarNuevoStock"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ingrese nuevo stock"
+        android:textSize="16sp"
+        android:layout_marginBottom="8dp" />
+
+    <!-- Caja de texto para el nuevo stock -->
+    <EditText
+        android:id="@+id/editTextNuevoStock"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Nuevo stock"
+        android:inputType="number"
+        android:layout_marginBottom="24dp" />
+
+    <!-- Botones Aceptar y Cancelar alineados horizontalmente -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <!-- Botón Aceptar -->
+        <Button
+            android:id="@+id/buttonAceptarStock"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Aceptar"
+            android:layout_marginEnd="16dp" />
+
+        <!-- Botón Cancelar -->
+        <Button
+            android:id="@+id/buttonCancelarStock"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cancelar" />
+
+    </LinearLayout>
+
+</LinearLayout>

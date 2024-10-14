@@ -136,6 +136,7 @@
                     android:textSize="25dp"
                     android:textStyle="bold"
                     android:layout_centerInParent="true"/>
+
             </RelativeLayout>
 
         </LinearLayout>

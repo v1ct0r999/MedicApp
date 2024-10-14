@@ -1,0 +1,70 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:gravity="center"
+    android:background="@drawable/fondo">
+
+    <!-- Texto que muestra la frecuencia actual -->
+    <TextView
+        android:id="@+id/textViewFrecuenciaActual"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Antes la frecuencia era"
+        android:textSize="18sp"
+        android:layout_marginBottom="8dp" />
+
+    <!-- Frecuencia anterior (puedes cambiar el valor dinámicamente en Java/Kotlin) -->
+    <TextView
+        android:id="@+id/textViewFrecuenciaValor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Frecuencia: 8 Hrs"
+        android:textSize="16sp"
+        android:layout_marginBottom="16dp" />
+
+    <!-- Campo para ingresar la nueva frecuencia -->
+    <TextView
+        android:id="@+id/textViewIngresarNuevaFrecuencia"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ingrese nueva frecuencia"
+        android:textSize="16sp"
+        android:layout_marginBottom="8dp" />
+
+    <!-- Caja de texto para la nueva frecuencia -->
+    <EditText
+        android:id="@+id/editTextNuevaFrecuencia"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Nueva frecuencia"
+        android:inputType="number"
+        android:layout_marginBottom="24dp" />
+
+    <!-- Botones Aceptar y Cancelar alineados horizontalmente -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <!-- Botón Aceptar -->
+        <Button
+            android:id="@+id/buttonAceptarFrecuencia"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Aceptar"
+            android:layout_marginEnd="16dp" />
+
+        <!-- Botón Cancelar -->
+        <Button
+            android:id="@+id/buttonCancelarFrecuencia"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cancelar" />
+
+    </LinearLayout>
+
+</LinearLayout>
