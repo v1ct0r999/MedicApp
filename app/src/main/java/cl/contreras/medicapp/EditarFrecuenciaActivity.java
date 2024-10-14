@@ -8,7 +8,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
-public class activity_edit_frecuencia extends AppCompatActivity {
+public class EditarFrecuenciaActivity extends AppCompatActivity {
 
     private TextView textViewFrecuenciaActual;
     private EditText editTextNuevaFrecuencia;
@@ -17,7 +17,7 @@ public class activity_edit_frecuencia extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_edit_frecuencia);
+        setContentView(R.layout.activity_editar_frecuencia);
 
         // Enlazar elementos de la interfaz
         textViewFrecuenciaActual = findViewById(R.id.textViewFrecuenciaValor);
@@ -35,11 +35,11 @@ public class activity_edit_frecuencia extends AppCompatActivity {
                 // Validar que no esté vacío
                 if (!nuevaFrecuencia.isEmpty()) {
                     // Aquí podrías guardar el valor de la nueva frecuencia o enviarlo a otra actividad
-                    Toast.makeText(activity_edit_frecuencia.this, "Nueva frecuencia guardada: " + nuevaFrecuencia, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(EditarFrecuenciaActivity.this, "Nueva frecuencia guardada: " + nuevaFrecuencia, Toast.LENGTH_SHORT).show();
                     // Opcional: Regresar a la actividad principal
                     finish();
                 } else {
-                    Toast.makeText(activity_edit_frecuencia.this, "Por favor, ingrese una nueva frecuencia.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(EditarFrecuenciaActivity.this, "Por favor, ingrese una nueva frecuencia.", Toast.LENGTH_SHORT).show();
                 }
             }
         });

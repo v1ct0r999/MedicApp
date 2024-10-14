@@ -8,44 +8,44 @@ import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
-public class activity_edit_stock extends AppCompatActivity {
+public class EditarDosisActivity extends AppCompatActivity {
 
-    private TextView textViewStockActual;
-    private EditText editTextNuevoStock;
-    private Button buttonAceptarStock, buttonCancelarStock;
+    private TextView textViewDosisActual;
+    private EditText editTextNuevaDosis;
+    private Button buttonAceptarDosis, buttonCancelarDosis;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_edit_stock);
+        setContentView(R.layout.activity_editar_dosis);
 
         // Enlazar elementos de la interfaz
-        textViewStockActual = findViewById(R.id.textViewStockValor);
-        editTextNuevoStock = findViewById(R.id.editTextNuevoStock);
-        buttonAceptarStock = findViewById(R.id.buttonAceptarStock);
-        buttonCancelarStock = findViewById(R.id.buttonCancelarStock);
+        textViewDosisActual = findViewById(R.id.textViewDosisValor);
+        editTextNuevaDosis = findViewById(R.id.editTextNuevaDosis);
+        buttonAceptarDosis = findViewById(R.id.buttonAceptarDosis);
+        buttonCancelarDosis = findViewById(R.id.buttonCancelarDosis);
 
         // Acción del botón Aceptar
-        buttonAceptarStock.setOnClickListener(new View.OnClickListener() {
+        buttonAceptarDosis.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // Obtener el valor ingresado
-                String nuevoStock = editTextNuevoStock.getText().toString();
+                String nuevaDosis = editTextNuevaDosis.getText().toString();
 
                 // Validar que no esté vacío
-                if (!nuevoStock.isEmpty()) {
+                if (!nuevaDosis.isEmpty()) {
                     // Aquí podrías guardar el valor del nuevo stock o enviarlo a otra actividad
-                    Toast.makeText(activity_edit_stock.this, "Nuevo stock guardado: " + nuevoStock, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(EditarDosisActivity.this, "Nueva dosis guardada: " + nuevaDosis, Toast.LENGTH_SHORT).show();
                     // Opcional: Regresar a la actividad principal
                     finish();
                 } else {
-                    Toast.makeText(activity_edit_stock.this, "Por favor, ingrese el nuevo stock.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(EditarDosisActivity.this, "Por favor, ingrese la nueva dosis.", Toast.LENGTH_SHORT).show();
                 }
             }
         });
 
         // Acción del botón Cancelar
-        buttonCancelarStock.setOnClickListener(new View.OnClickListener() {
+        buttonCancelarDosis.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // Cancelar y regresar a la actividad anterior
@@ -54,4 +54,3 @@ public class activity_edit_stock extends AppCompatActivity {
         });
     }
 }
-

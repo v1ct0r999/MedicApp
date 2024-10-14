@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -15,7 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 public class OpcionesAlarmaActivity extends AppCompatActivity {
 
     private TextView alarmaNombreTextView;
-    private Button btnVerDetalles, btnEditar, btnEliminar, BotonAtrasAlarma;
+    private Button btnDetallesAlarma, btnEditarAlarma, btnEliminarAlarma, BotonAtrasAlarma;
     private DatabaseHelper dbHelper;
     private int alarmaId; // ID de la alarma que se recibirá desde el Intent
 
@@ -32,9 +33,9 @@ public class OpcionesAlarmaActivity extends AppCompatActivity {
 
         // Referencias a los elementos de la vista
         alarmaNombreTextView = findViewById(R.id.alarmaNombreTextView);
-        btnVerDetalles = findViewById(R.id.btnVerDetalles);
-        btnEditar = findViewById(R.id.btnEditar);
-        btnEliminar = findViewById(R.id.btnEliminar);
+        btnDetallesAlarma = findViewById(R.id.btnDetallesAlarma);
+        btnEditarAlarma = findViewById(R.id.btnEditarAlarma);
+        btnEliminarAlarma = findViewById(R.id.btnEliminarAlarma);
         BotonAtrasAlarma = findViewById(R.id.BotonAtrasAlarma);
 
         // Mostrar el nombre de la alarma en el TextView si está disponible
@@ -43,15 +44,18 @@ public class OpcionesAlarmaActivity extends AppCompatActivity {
         }
 
         // Lógica para cada botón
-        btnVerDetalles.setOnClickListener(v -> {
+        btnDetallesAlarma.setOnClickListener(v -> {
             // Ir a la pantalla para ver detalles
         });
 
-        btnEditar.setOnClickListener(v -> {
-            // Ir a la pantalla para editar la alarma
+        btnEditarAlarma.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(OpcionesAlarmaActivity.this, MenuEditarAlarmaActivity.class));
+            }
         });
 
-        btnEliminar.setOnClickListener(v -> {
+        btnEliminarAlarma.setOnClickListener(v -> {
             new AlertDialog.Builder(OpcionesAlarmaActivity.this)
                     .setTitle("Eliminar alarma")
                     .setMessage("¿Estás seguro de que deseas eliminar esta alarma?")

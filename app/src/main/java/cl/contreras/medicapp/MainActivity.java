@@ -1,7 +1,8 @@
 package cl.contreras.medicapp;
 
 import android.Manifest;
-import android.annotation.SuppressLint;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
@@ -13,14 +14,14 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 public class MainActivity extends AppCompatActivity {
 
     DatabaseHelper dbHelper;
     LinearLayout alarmaLayout;
-    Button buttonEditDosis, buttonEditFrecuencia, buttonEditStock;
 
-    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,31 +42,7 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
-        // Enlazar los botones de edición
-        buttonEditDosis = findViewById(R.id.buttonAceptarDosis);
-        buttonEditFrecuencia = findViewById(R.id.buttonAceptarFrecuencia);
-        buttonEditStock = findViewById(R.id.buttonAceptarStock);
-
-
-        // Navegar a EditDosisActivity al hacer clic en el botón de Editar Dosis
-        buttonEditDosis.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, EditDosisActivity.class);
-            startActivity(intent);
-        });
-
-        // Navegar a EditFrecuenciaActivity al hacer clic en el botón de Editar Frecuencia
-        buttonEditFrecuencia.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, activity_edit_frecuencia.class);
-            startActivity(intent);
-        });
-
-        // Navegar a EditStockActivity al hacer clic en el botón de Editar Stock
-        buttonEditStock.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, activity_edit_stock.class);
-            startActivity(intent);
-        });
-
-        loadAlarmas(); // Cargar las alarmas desde la base de datos
+        loadAlarmas();
 
         ImageButton botonContacto = (ImageButton) findViewById(R.id.agregarcontacto);
 
@@ -116,17 +93,20 @@ public class MainActivity extends AppCompatActivity {
         loadAlarmas(); // Recargar la lista cuando regrese a la actividad principal
     }
 
-    // Gestión del resultado del permiso
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == REQUEST_PERMISSION_CODE) {
-            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                Toast.makeText(this, "Permisos de notificación concedidos", Toast.LENGTH_SHORT).show();
-            } else {
-                Toast.makeText(this, "Permisos de notificación denegados", Toast.LENGTH_SHORT).show();
-            }
+    private void createNotificationChannel() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            CharSequence name = "AlarmaChannel";
+            String description = "Canal para alarmas";
+            int importance = NotificationManager.IMPORTANCE_HIGH;
+            NotificationChannel channel = new NotificationChannel("ALARMA_CHANNEL_ID", name, importance);
+            channel.setDescription(description);
+
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
         }
     }
+
+
 }
-}
+
+

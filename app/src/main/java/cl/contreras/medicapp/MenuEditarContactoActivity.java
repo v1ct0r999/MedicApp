@@ -7,17 +7,14 @@ import android.widget.Button;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
-public class EditarContactoActivity extends AppCompatActivity {
+public class MenuEditarContactoActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_editar_contacto);
+        setContentView(R.layout.activity_menu_editar_contacto);
 
         Button botonEditarNombreContacto = (Button) findViewById(R.id.btnEditarNombreContacto);
         Button botonEditarFonoContacto = (Button) findViewById(R.id.btnEditarFonoContacto);
@@ -27,7 +24,7 @@ public class EditarContactoActivity extends AppCompatActivity {
         botonEditarNombreContacto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(EditarContactoActivity.this, EditarNombreContactoActivity.class));
+                startActivity(new Intent(MenuEditarContactoActivity.this, EditarNombreContactoActivity.class));
             }
         });
 
@@ -35,7 +32,7 @@ public class EditarContactoActivity extends AppCompatActivity {
         botonEditarFonoContacto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(EditarContactoActivity.this, EditarNumeroContactoActivity.class));
+                startActivity(new Intent(MenuEditarContactoActivity.this, EditarNumeroContactoActivity.class));
             }
         });
 
@@ -43,7 +40,7 @@ public class EditarContactoActivity extends AppCompatActivity {
         botonVolverEditarContacto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(EditarContactoActivity.this, MenuContactoActivity.class));
+                startActivity(new Intent(MenuEditarContactoActivity.this, MenuContactoActivity.class));
             }
         });
 

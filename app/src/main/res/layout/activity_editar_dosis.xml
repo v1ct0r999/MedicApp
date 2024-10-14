@@ -9,37 +9,37 @@
 
     <!-- Texto que muestra el stock actual -->
     <TextView
-        android:id="@+id/textViewStockActual"
+        android:id="@+id/textViewDosisActual"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Antes el stock era"
+        android:text="Antes la dosis era"
         android:textSize="18sp"
         android:layout_marginBottom="8dp" />
 
-    <!-- Stock anterior  -->
+    <!-- Stock anterior (puedes cambiar el valor dinámicamente en Java/Kotlin) -->
     <TextView
-        android:id="@+id/textViewStockValor"
+        android:id="@+id/textViewDosisValor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Stock: 30 "
+        android:text="Dosis: 3 "
         android:textSize="16sp"
         android:layout_marginBottom="16dp" />
 
     <!-- Campo para ingresar el nuevo stock -->
     <TextView
-        android:id="@+id/textViewIngresarNuevoStock"
+        android:id="@+id/textViewIngresarNuevaDosis"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Ingrese nuevo stock"
+        android:text="Ingrese nueva dosis"
         android:textSize="16sp"
         android:layout_marginBottom="8dp" />
 
     <!-- Caja de texto para el nuevo stock -->
     <EditText
-        android:id="@+id/editTextNuevoStock"
+        android:id="@+id/editTextNuevaDosis"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Nuevo stock"
+        android:hint="Nueva dosis"
         android:inputType="number"
         android:layout_marginBottom="24dp" />
 
@@ -50,23 +50,19 @@
         android:orientation="horizontal"
         android:gravity="center">
 
-        <!-- Botón Aceptar con tamaño mínimo de 48dp -->
+        <!-- Botón Aceptar -->
         <Button
             android:id="@+id/buttonAceptarDosis"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:minHeight="48dp"
-            android:minWidth="48dp"
             android:text="Aceptar"
             android:layout_marginEnd="16dp" />
 
-        <!-- Botón Cancelar con tamaño mínimo de 48dp -->
+        <!-- Botón Cancelar -->
         <Button
-            android:id="@+id/buttonCancelarStock"
+            android:id="@+id/buttonCancelarDosis"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:minHeight="48dp"
-            android:minWidth="48dp"
             android:text="Cancelar" />
 
     </LinearLayout>

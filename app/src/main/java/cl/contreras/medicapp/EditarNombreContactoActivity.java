@@ -7,9 +7,6 @@ import android.widget.Button;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 public class EditarNombreContactoActivity extends AppCompatActivity {
 
@@ -25,7 +22,7 @@ public class EditarNombreContactoActivity extends AppCompatActivity {
         botonVolverEditarNombreContacto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(EditarNombreContactoActivity.this, EditarContactoActivity.class));
+                startActivity(new Intent(EditarNombreContactoActivity.this, MenuEditarContactoActivity.class));
             }
         });
 
