@@ -65,7 +65,13 @@ public class AddAlarmaActivity extends AppCompatActivity {
         intent.putExtra("nombre_alarma", nombre);
 
         // Usar alarmaId como requestCode
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, alarmaId, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(
+                this,
+                0,
+                intent,
+                PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE
+
+        );
 
         // Programar la alarma para que se active cada X minutos
         long triggerTime = Calendar.getInstance().getTimeInMillis() + frecuencia * 60000; // 60000 milisegundos en un minuto

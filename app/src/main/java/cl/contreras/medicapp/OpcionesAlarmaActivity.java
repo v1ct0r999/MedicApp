@@ -98,7 +98,12 @@ public class OpcionesAlarmaActivity extends AppCompatActivity {
         intent.putExtra("alarma_id", alarmaId); // Se envía el ID de la alarma
 
         // Crear el PendingIntent con el mismo requestCode que se utilizó para programar la alarma
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, alarmaId, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(
+                this,
+                0,
+                intent,
+                PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE
+        );
 
         // Cancelar la alarma
         if (alarmManager != null) {
