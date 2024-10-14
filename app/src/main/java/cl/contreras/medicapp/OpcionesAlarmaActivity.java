@@ -16,14 +16,19 @@ public class OpcionesAlarmaActivity extends AppCompatActivity {
 
     private TextView alarmaNombreTextView;
     private Button btnVerDetalles, btnEditar, btnEliminar, BotonAtrasAlarma;
+    private DatabaseHelper dbHelper;
+    private int alarmaId; // ID de la alarma que se recibirá desde el Intent
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_opciones_alarma);
 
-        // Obtener el nombre de la alarma desde el Intent
-        String alarmaNombre = getIntent().getStringExtra("alarma_nombre");
+        dbHelper = new DatabaseHelper(this);
+
+        // Obtener el ID y nombre de la alarma desde el Intent
+        alarmaId = getIntent().getIntExtra("alarma_id", -1); // Recibir el ID de la alarma
+        String alarmaNombre = getIntent().getStringExtra("alarma_nombre"); // Nombre opcional
 
         // Referencias a los elementos de la vista
         alarmaNombreTextView = findViewById(R.id.alarmaNombreTextView);
@@ -32,29 +37,30 @@ public class OpcionesAlarmaActivity extends AppCompatActivity {
         btnEliminar = findViewById(R.id.btnEliminar);
         BotonAtrasAlarma = findViewById(R.id.BotonAtrasAlarma);
 
-        // Mostrar el nombre de la alarma en el TextView
+        // Mostrar el nombre de la alarma en el TextView si está disponible
         if (alarmaNombre != null) {
             alarmaNombreTextView.setText(alarmaNombre);
         }
 
-        // Aquí después agregaremos la lógica para cada botón
+        // Lógica para cada botón
         btnVerDetalles.setOnClickListener(v -> {
-            // ir a la pantalla para ver detalles
+            // Ir a la pantalla para ver detalles
         });
 
         btnEditar.setOnClickListener(v -> {
-            // ir a la pantalla para editar la alarma
+            // Ir a la pantalla para editar la alarma
         });
 
         btnEliminar.setOnClickListener(v -> {
-            // aun nose si ir sa pantalla o hacer una alerta para eliminar la alarma
             new AlertDialog.Builder(OpcionesAlarmaActivity.this)
                     .setTitle("Eliminar alarma")
                     .setMessage("¿Estás seguro de que deseas eliminar esta alarma?")
                     .setPositiveButton("Si", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
-                            eliminarAlarma(alarmaNombre);
+                            if (alarmaId != -1) {  // Verifica que el ID de la alarma sea válido
+                                eliminarAlarma(alarmaId);
+                            }
                         }
                     })
                     .setNegativeButton("No", null)
@@ -66,13 +72,12 @@ public class OpcionesAlarmaActivity extends AppCompatActivity {
             startActivity(intent);
         });
     }
-    private void eliminarAlarma(String alarmaNombre) {
-        DatabaseHelper databaseHelper = new DatabaseHelper(this);
 
+    private void eliminarAlarma(int alarmaId) {
         // Cancela la alarma en el sistema antes de eliminarla de la base de datos
-        cancelarAlarma(alarmaNombre);
+        cancelarAlarma(alarmaId);
 
-        boolean result = databaseHelper.eliminarAlarma(alarmaNombre);
+        boolean result = dbHelper.eliminarAlarma(alarmaId);
 
         if (result) {
             Toast.makeText(this, "Alarma eliminada con éxito", Toast.LENGTH_SHORT).show();
@@ -81,20 +86,28 @@ public class OpcionesAlarmaActivity extends AppCompatActivity {
         }
 
         Intent intent = new Intent(OpcionesAlarmaActivity.this, MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
-        finish(); // Cierra esta actividad
+        finish();  // Cierra esta actividad
     }
 
-    // Método para cancelar la alarma en AlarmManager
-    private void cancelarAlarma(String alarmaNombre) {
+    // Método para cancelar la alarma en AlarmManager usando el ID de la alarma
+    private void cancelarAlarma(int alarmaId) {
         AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
         Intent intent = new Intent(OpcionesAlarmaActivity.this, ReminderBroadcastReceiver.class);
-        intent.putExtra("nombre_alarma", alarmaNombre);
+        intent.putExtra("alarma_id", alarmaId); // Se envía el ID de la alarma
 
-        // El mismo PendingIntent con el que se programó la alarma
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        // Crear el PendingIntent con el mismo requestCode que se utilizó para programar la alarma
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(
+                this,
+                0,
+                intent,
+                PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE
+        );
 
         // Cancelar la alarma
-        alarmManager.cancel(pendingIntent);
+        if (alarmManager != null) {
+            alarmManager.cancel(pendingIntent);
+        }
     }
 }

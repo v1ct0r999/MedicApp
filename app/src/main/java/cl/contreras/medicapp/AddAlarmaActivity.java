@@ -41,14 +41,16 @@ public class AddAlarmaActivity extends AppCompatActivity {
                 int frecuencia = Integer.parseInt(frecuenciaText);
                 boolean isInserted = dbHelper.addAlarma(nombre, dosis, stock, frecuencia);
                 if (isInserted) {
-                    // Programar recordatorio
-                    scheduleReminder(nombre, frecuencia);
+                    // Cambiado: Obtener el ID de la última alarma insertada
+                    int alarmaId = dbHelper.getLastInsertedId(); // Implementa este método en DatabaseHelper
+                    scheduleReminder(nombre, frecuencia, alarmaId); // Usar alarmaId aquí
                     Toast.makeText(AddAlarmaActivity.this, "Alarma guardada", Toast.LENGTH_SHORT).show();
                     finish(); // Volver a la actividad principal
                 } else {
                     Toast.makeText(AddAlarmaActivity.this, "Error al guardar", Toast.LENGTH_SHORT).show();
                 }
             }
+
         });
         btnCancel.setOnClickListener(v -> {
             Intent intent = new Intent(AddAlarmaActivity.this, MainActivity.class);
@@ -57,15 +59,22 @@ public class AddAlarmaActivity extends AppCompatActivity {
     }
 
     // Método para programar el recordatorio
-    private void scheduleReminder(String nombre, int frecuencia) {
+    private void scheduleReminder(String nombre, int frecuencia, int alarmaId) {
         AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
         Intent intent = new Intent(AddAlarmaActivity.this, ReminderBroadcastReceiver.class);
         intent.putExtra("nombre_alarma", nombre);
 
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        // Usar alarmaId como requestCode
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(
+                this,
+                0,
+                intent,
+                PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE
 
-        // Programar la alarma para que se active cada X horas
-        long triggerTime = Calendar.getInstance().getTimeInMillis() + frecuencia * 60000; // 60000  3600000
+        );
+
+        // Programar la alarma para que se active cada X minutos
+        long triggerTime = Calendar.getInstance().getTimeInMillis() + frecuencia * 60000; // 60000 milisegundos en un minuto
 
         // Configurar una alarma repetitiva
         alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, triggerTime, frecuencia * 60000, pendingIntent);

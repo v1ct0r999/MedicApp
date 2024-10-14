@@ -6,7 +6,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".OpcionesAlarmaActivity"
+    tools:context=".MenuContactoActivity"
     android:orientation="vertical"
     android:background="@drawable/fondo">
 
@@ -72,7 +72,7 @@
                 android:layout_height="match_parent">
 
                 <Button
-                    android:id="@+id/btnVerDetalles"
+                    android:id="@+id/btnNuevoContacto"
                     android:layout_width="300dp"
                     android:layout_height="80dp"
                     android:layout_marginBottom="16dp"
@@ -126,7 +126,7 @@
                 android:layout_height="match_parent">
 
                 <Button
-                    android:id="@+id/btnEditar"
+                    android:id="@+id/btnEditarContacto"
                     android:layout_width="300dp"
                     android:layout_height="80dp"
                     android:layout_marginBottom="16dp"
@@ -150,7 +150,7 @@
         android:orientation="vertical"
         android:layout_weight="1">
 
-        <!-- LINEAL IMAGEN USER -->
+        <!-- LINEAL IMAGEN Basurero -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -197,8 +197,7 @@
 
     </LinearLayout>
 
-
-
+    <!-- LINEAL VOLVER -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -236,13 +235,12 @@
                 android:layout_height="match_parent">
 
                 <Button
-                    android:id="@+id/BotonAtrasAlarma"
+                    android:id="@+id/btnVolverContacto"
                     android:layout_width="300dp"
                     android:layout_height="80dp"
                     android:layout_marginBottom="16dp"
-                    android:backgroundTint="@color/cyan"
                     android:text="Volver"
-                    android:textColor="@android:color/black"
+                    android:textColor="@android:color/white"
                     android:textSize="25dp"
                     android:textStyle="bold"
                     android:layout_centerInParent="true"/>

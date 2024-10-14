@@ -6,12 +6,12 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AddAlarmaActivity"
+    tools:context=".AgregarContactoActivity"
     android:orientation="vertical"
     android:padding="16dp"
     android:background="@drawable/fondo">
 
-    <!-- lineal del titulo "Agregar alarma" -->
+    <!-- lineal del titulo "Agregar Nuevo Contacto" -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -24,9 +24,8 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Agregar Alarma"
-                android:textColor="@color/black"
-                android:textSize="40dp"
+                android:text="Agregar Nuevo Contacto"
+                android:textSize="35dp"
                 android:textStyle="bold"
                 android:textAlignment="center"
                 android:layout_centerInParent="true">
@@ -36,17 +35,14 @@
 
     </LinearLayout>
 
-
-
-
-    <!-- lineal del apartado nombre medicamento -->
+    <!-- LINEAL DEL APARTADO NOMBRE DEL CONTACTO -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:layout_weight="1">
 
-        <!-- linear textview del nombre del medicamento -->
+        <!-- LINEAL DEL TEXTVIEW DEL NOMBRE DEL CONTACTO -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -59,8 +55,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Nombre Medicamento"
-                    android:textColor="@color/black"
+                    android:text="Nombre Completo"
                     android:textStyle="italic"
                     android:textSize="20dp"
                     android:layout_centerInParent="true">
@@ -70,7 +65,7 @@
 
         </LinearLayout>
 
-        <!-- linear Edittext del nombre del medicamento -->
+        <!-- LINEAL EDITTEXT DEL NOMBRE DEL CONTACTO -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -81,11 +76,12 @@
                 android:layout_height="match_parent">
 
                 <EditText
-                    android:id="@+id/editTextNombre"
+                    android:id="@+id/nombreContacto"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
-                    android:hint="Nombre del medicamento"
+                    android:textSize="20dp"
+                    android:hint="Nombre y apelliddel Contacto"
                     android:textColor="@color/black"/>
 
             </RelativeLayout>
@@ -96,14 +92,14 @@
 
 
 
-    <!-- lineal del apartado de dosis -->
+    <!-- LINEAL DEL APARTADO NUMERO TELEFONICO -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:layout_weight="1">
 
-        <!-- linear textview de las dosis del medicamento -->
+        <!-- LINEAL DEL TEXTVIEW DEL NUMERO TELEFONICO-->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -116,8 +112,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Dosis del Medicamento"
-                    android:textColor="@color/black"
+                    android:text="Numero Telefonico"
                     android:textStyle="italic"
                     android:textSize="20dp"
                     android:layout_centerInParent="true">
@@ -127,7 +122,7 @@
 
         </LinearLayout>
 
-        <!-- linear Edittext de las dosis del medicamento -->
+        <!-- LINEAL EDITTEXT DEL NUMERO TELEFONICO -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -138,131 +133,12 @@
                 android:layout_height="match_parent">
 
                 <EditText
-                    android:id="@+id/editTextDosis"
+                    android:id="@+id/telefonoContacto"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Dosis recetada"
-                    android:inputType=""
-                    android:textColor="@color/black"/>
-
-            </RelativeLayout>
-
-        </LinearLayout>
-
-    </LinearLayout>
-
-
-    <!-- LINEAL DEL APARTADO STOCK -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1">
-
-        <!-- LINEAL DEL APARTADO DE FRECUECNIA -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:layout_weight="1">
-
-            <!-- LINEAR TEXTVIEW DEL STOCK DEL MEDICAMENTO -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1">
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Stock del medicamento"
-                        android:textColor="@color/black"
-                        android:textStyle="italic"
-                        android:textSize="20dp"
-                        android:layout_centerInParent="true">
-                    </TextView>
-
-                </RelativeLayout>
-
-            </LinearLayout>
-
-            <!-- LINEAL EDTITTEXT DEL STOCK DEL MEDICAMENTO -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1">
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <EditText
-                        android:id="@+id/editTextStock"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="Cantidad total (stock)"
-                        android:inputType=""
-                        android:textColor="@color/black"/>
-
-
-                </RelativeLayout>
-
-            </LinearLayout>
-        </LinearLayout>
-
-    </LinearLayout>
-
-
-    <!-- LINEAL DEL APARTADO DE FRECUECNIA -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:layout_weight="1">
-
-        <!-- LINEAR TEXTVIEW DE LA FRECUENCIA DEL MEDICAMENTO -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1">
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Frecuencia del Medicamento"
-                    android:textColor="@color/black"
-                    android:textStyle="italic"
+                    android:layout_centerInParent="true"
                     android:textSize="20dp"
-                    android:layout_centerInParent="true">
-                </TextView>
-
-            </RelativeLayout>
-
-        </LinearLayout>
-
-        <!-- LINEAL EDTITTEXT DE LA FRECUENCIA DEL MEDICAMENTO -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1">
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <EditText
-                    android:id="@+id/editTextFrecuencia"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Frecuencia (horas)"
-                    android:inputType="date"
+                    android:hint="ejemplo: +56911112222"
                     android:textColor="@color/black"/>
 
             </RelativeLayout>
@@ -270,7 +146,6 @@
         </LinearLayout>
 
     </LinearLayout>
-
 
     <!-- LINEAL DEL APARTDO DE BOTONCES ACEPTAR Y CANCELAR -->
     <LinearLayout
@@ -278,7 +153,7 @@
         android:layout_height="match_parent"
         android:layout_weight="1">
 
-        <!-- boton guardar alarma -->
+        <!-- boton guardar contacto -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -289,13 +164,14 @@
                 android:layout_height="match_parent">
 
                 <Button
-                    android:id="@+id/btnSave"
+                    android:id="@+id/btnAceptarContacto"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Guardar"
-                    android:textColor="@color/white"
+                    android:text="Aceptar"
                     android:textStyle="bold"
                     android:textSize="30dp"
+                    android:height="75dp"
+                    android:width="175dp"
                     android:layout_centerInParent="true" />
 
             </RelativeLayout>
@@ -313,13 +189,14 @@
                 android:layout_height="match_parent">
 
                 <Button
-                    android:id="@+id/btnCancel"
+                    android:id="@+id/btnVolverAgregarContacto"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Cancelar"
-                    android:textColor="@color/white"
+                    android:text="Volver"
                     android:textStyle="bold"
                     android:textSize="30dp"
+                    android:height="75dp"
+                    android:width="175dp"
                     android:layout_centerInParent="true" />
 
             </RelativeLayout>
@@ -327,6 +204,5 @@
         </LinearLayout>
 
     </LinearLayout>
-
 
 </LinearLayout>

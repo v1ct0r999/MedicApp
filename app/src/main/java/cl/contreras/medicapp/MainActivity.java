@@ -7,14 +7,15 @@ import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final int REQUEST_PERMISSION_CODE = 100;
     DatabaseHelper dbHelper;
     LinearLayout alarmaLayout;
     Button buttonEditDosis, buttonEditFrecuencia, buttonEditStock;
@@ -25,10 +26,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Verificar y solicitar permiso de notificaciones
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            if (checkSelfPermission(Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
-                requestPermissions(new String[]{Manifest.permission.POST_NOTIFICATIONS}, REQUEST_PERMISSION_CODE);
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.POST_NOTIFICATIONS}, 1);
             }
         }
 
@@ -66,6 +66,15 @@ public class MainActivity extends AppCompatActivity {
         });
 
         loadAlarmas(); // Cargar las alarmas desde la base de datos
+
+        ImageButton botonContacto = (ImageButton) findViewById(R.id.agregarcontacto);
+
+        botonContacto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, MenuContactoActivity.class));
+            }
+        });
     }
 
     private void loadAlarmas() {
@@ -74,6 +83,7 @@ public class MainActivity extends AppCompatActivity {
 
         if (cursor.moveToFirst()) {
             do {
+                int id = cursor.getInt(0);  // Obtener ID de la alarma
                 String nombre = cursor.getString(1);
 
                 // Crear un nuevo botón grande
@@ -88,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
 
                 alarmaButton.setOnClickListener(v -> {
                     Intent intent = new Intent(MainActivity.this, OpcionesAlarmaActivity.class);
-                    intent.putExtra("alarma_nombre", nombre); // Enviar el nombre de la alarma si es necesario
+                    intent.putExtra("alarma_id", id);  // Enviar el ID de la alarma
                     startActivity(intent);
                 });
 
@@ -118,4 +128,5 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
+}
 }
