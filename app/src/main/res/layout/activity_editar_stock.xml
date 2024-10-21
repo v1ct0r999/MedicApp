@@ -8,64 +8,196 @@
     android:gravity="center"
     android:background="@drawable/fondo">
 
-    <!-- Texto que muestra el stock actual -->
-    <TextView
-        android:id="@+id/textViewStockActual"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Antes el stock era"
-        android:textSize="18sp"
-        android:layout_marginBottom="8dp" />
-
-    <!-- Stock anterior (puedes cambiar el valor dinámicamente en Java/Kotlin) -->
-    <TextView
-        android:id="@+id/textViewStockValor"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Stock: 30 "
-        android:textSize="16sp"
-        android:layout_marginBottom="16dp" />
-
-    <!-- Campo para ingresar el nuevo stock -->
-    <TextView
-        android:id="@+id/textViewIngresarNuevoStock"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Ingrese nuevo stock"
-        android:textSize="16sp"
-        android:layout_marginBottom="8dp" />
-
-    <!-- Caja de texto para el nuevo stock -->
-    <EditText
-        android:id="@+id/editTextNuevoStock"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Nuevo stock"
-        android:inputType="number"
-        android:layout_marginBottom="24dp" />
-
-    <!-- Botones Aceptar y Cancelar alineados horizontalmente -->
+    <!-- lineal del titulo "Editar nueva dosis" -->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center">
+        android:layout_height="match_parent"
+        android:layout_weight="1">
 
-        <!-- Botón Aceptar -->
-        <Button
-            android:id="@+id/buttonAceptarStock"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Aceptar"
-            android:layout_marginEnd="16dp" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-        <!-- Botón Cancelar -->
-        <Button
-            android:id="@+id/buttonCancelarStock"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Cancelar" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Editar dosis"
+                android:textSize="40dp"
+                android:textStyle="bold"
+                android:textAlignment="center"
+                android:layout_centerInParent="true">
+            </TextView>
+
+        </RelativeLayout>
 
     </LinearLayout>
+
+    <!-- Lineal dosis anterior -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <!-- -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="2">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="40dp"
+                    android:src="@drawable/pastilla">
+                </ImageView>
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <!-- -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/textViewStockValor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Stock anterior:"
+                    android:textSize="25dp"
+                    android:textAlignment="center"
+                    android:layout_centerVertical="true">
+                </TextView>
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <!-- Lineal edit text nueva dosis -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_weight="1">
+
+        <!-- LINEAL DEL TEXTVIEW DEL NOMBRE DEL CONTACTO -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Nueva Dosis"
+                    android:textStyle="italic"
+                    android:textSize="20dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="50dp">
+                </TextView>
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <!-- LINEAL EDITTEXT DEL NOMBRE DEL CONTACTO -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <EditText
+                    android:id="@+id/editTextNuevoStock"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:textSize="20dp"
+                    android:hint="Nuevo stock"
+                    android:textColor="@color/black"/>
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!-- LINEAL DEL APARTDO DE BOTONCES ACEPTAR Y CANCELAR -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <!-- boton guardar contacto -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <Button
+                    android:id="@+id/buttonAceptarStock"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Aceptar"
+                    android:textStyle="bold"
+                    android:textSize="30dp"
+                    android:height="75dp"
+                    android:layout_centerInParent="true" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <Button
+                    android:id="@+id/buttonCancelarStock"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Volver"
+                    android:textStyle="bold"
+                    android:textSize="30dp"
+                    android:height="75dp"
+                    android:layout_centerInParent="true" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
 
 </LinearLayout>
