@@ -3,7 +3,9 @@ package cl.contreras.medicapp;
 import android.Manifest;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.os.Build;
@@ -12,6 +14,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -21,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
 
     DatabaseHelper dbHelper;
     LinearLayout alarmaLayout;
+    private SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +36,16 @@ public class MainActivity extends AppCompatActivity {
                 ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.POST_NOTIFICATIONS}, 1);
             }
         }
+
+        TextView Saludo = findViewById(R.id.Saludo);
+
+        sharedPreferences = getSharedPreferences("UserPrefs", Context.MODE_PRIVATE);
+
+        // Obtener el nombre guardado en SharedPreferences
+        String name = sharedPreferences.getString("USER_NAME", "Usuario");
+
+        // Mostrar el saludo con el nombre
+        Saludo.setText("Buenos dias " + name + " :)");
 
         dbHelper = new DatabaseHelper(this);
         alarmaLayout = findViewById(R.id.alarmaLayout);

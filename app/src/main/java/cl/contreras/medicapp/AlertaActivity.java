@@ -4,6 +4,7 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.widget.Button;
@@ -19,11 +20,22 @@ public class AlertaActivity extends AppCompatActivity {
     private Runnable timerRunnable;
     private static final int SNOOZE_TIME = 15 * 60 * 1000; // 15 minutos en milisegundos
     private MediaPlayer mediaPlayer; // Reproductor de sonido
+    private SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_alerta);
+
+        TextView RecordatorioNombre = findViewById(R.id.RecordatorioNombre);
+
+        sharedPreferences = getSharedPreferences("UserPrefs", Context.MODE_PRIVATE);
+
+        // Obtener el nombre guardado en SharedPreferences
+        String name = sharedPreferences.getString("USER_NAME", "Usuario");
+
+        // Mostrar el saludo con el nombre
+        RecordatorioNombre.setText("!!Hola usuario " + name + " Es hora de su medicamento¡¡");
 
         // Obtener el nombre del evento desde el Intent
         Intent intent = getIntent();
