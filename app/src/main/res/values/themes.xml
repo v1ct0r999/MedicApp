@@ -6,4 +6,10 @@
     </style>
 
     <style name="Theme.MedicApp" parent="Base.Theme.MedicApp" />
+
+    <style name="actionBarCustom" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">@color/cyan</item>
+        <item name="colorPrimaryDark">@color/cyan</item>
+        <item name="colorAccent">@color/cyan</item>
+    </style>
 </resources>
