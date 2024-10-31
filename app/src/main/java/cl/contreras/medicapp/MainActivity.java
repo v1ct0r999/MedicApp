@@ -58,8 +58,16 @@ public class MainActivity extends AppCompatActivity {
 
         loadAlarmas();
 
+        ImageButton botonCalendario = (ImageButton) findViewById(R.id.calendario);
         ImageButton botonContacto = (ImageButton) findViewById(R.id.agregarcontacto);
 
+
+        botonCalendario.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, CalendarioActivity.class));
+            }
+        });
         botonContacto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
