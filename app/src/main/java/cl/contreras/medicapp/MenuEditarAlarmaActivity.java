@@ -10,39 +10,46 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class MenuEditarAlarmaActivity extends AppCompatActivity {
 
+    private int alarmaId; // Variable para almacenar el ID de la alarma
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_menu_editar_alarma);
 
-        Button btnEditarDosis = (Button) findViewById(R.id.btnEditarDosis);
-        Button btnEditarFrecuencia = (Button) findViewById(R.id.btnEditarFrecuencia);
-        Button btnEditarStock = (Button) findViewById(R.id.btnEditarStock);
-        Button btnVolverEditarAlarma = (Button) findViewById(R.id.btnVolverEditarAlarma);
+        // Obtener el ID de la alarma que se está editando
+        alarmaId = getIntent().getIntExtra("alarmaId", -1);
 
+        Button btnEditarDosis = findViewById(R.id.btnEditarDosis);
+        Button btnEditarFrecuencia = findViewById(R.id.btnEditarFrecuencia);
+        Button btnEditarStock = findViewById(R.id.btnEditarStock);
+        Button btnVolverEditarAlarma = findViewById(R.id.btnVolverEditarAlarma);
 
-        // Conectar el layout EditarContacto con EditarNombreContacto
         btnEditarDosis.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MenuEditarAlarmaActivity.this, EditarDosisActivity.class));
+                Intent intent = new Intent(MenuEditarAlarmaActivity.this, EditarDosisActivity.class);
+                intent.putExtra("alarmaId", alarmaId);
+                startActivity(intent);
             }
         });
 
-        // Conectar el layout EditarContacto con EditarNumeroContacto
         btnEditarFrecuencia.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MenuEditarAlarmaActivity.this, EditarFrecuenciaActivity.class));
+                Intent intent = new Intent(MenuEditarAlarmaActivity.this, EditarFrecuenciaActivity.class);
+                intent.putExtra("alarmId", alarmaId);
+                startActivity(intent);
             }
         });
 
-        // Volver al MenuContacto
         btnEditarStock.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MenuEditarAlarmaActivity.this, EditarStockActivity.class));
+                Intent intent = new Intent(MenuEditarAlarmaActivity.this, EditarStockActivity.class);
+                intent.putExtra("alarmaId", alarmaId);
+                startActivity(intent);
             }
         });
 
@@ -52,6 +59,5 @@ public class MenuEditarAlarmaActivity extends AppCompatActivity {
                 startActivity(new Intent(MenuEditarAlarmaActivity.this, OpcionesAlarmaActivity.class));
             }
         });
-
     }
 }

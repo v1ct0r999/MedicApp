@@ -78,10 +78,10 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
             <EditText
-                android:id="@+id/usuario"
+                android:id="@+id/EditTextUsuario"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Ponga su nombre"
+                android:hint="Ingrese su nombre"
                 android:textColor="@color/black">
 
             </EditText>
@@ -96,7 +96,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
             <Button
-                android:id="@+id/btnentrar"
+                android:id="@+id/btnEntrar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Entrar"
