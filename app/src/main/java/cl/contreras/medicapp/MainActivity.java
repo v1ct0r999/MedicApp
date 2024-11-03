@@ -87,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
 
                 // Crear un nuevo botón grande
                 Button alarmaButton = new Button(this);
-                alarmaButton.setText("Nombre Alarma\n" + nombre + "\n\nVer detalles");
+                alarmaButton.setText("Nombre Alarma:\n" + nombre + "\n\nVer detalles");
                 alarmaButton.setLayoutParams(new LinearLayout.LayoutParams(
                         LinearLayout.LayoutParams.MATCH_PARENT,
                         400
