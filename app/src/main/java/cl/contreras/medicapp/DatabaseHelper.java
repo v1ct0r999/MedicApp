@@ -45,7 +45,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(createTable);
 
         String createContactosTable = "CREATE TABLE " + TABLE_CONTACTOS + " (" +
-                COLUMN_ID_CONTACTO + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                COLUMN_ID_CONTACTO + " INTEGER PRIMARY KEY, " +
                 COLUMN_NOMBRE_CONTACTO + " TEXT, " +
                 COLUMN_TELEFONO + " TEXT)";
         db.execSQL(createContactosTable);
@@ -93,9 +93,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return db.rawQuery("SELECT * FROM " + TABLE_NAME, null);
     }
 
-    public Cursor getAllContactos() { // Método para obtener todos los contactos
+    public Cursor getAllContactos() {
         SQLiteDatabase db = this.getReadableDatabase();
-        return db.rawQuery("SELECT * FROM " + TABLE_CONTACTOS, null);
+        return db.query(TABLE_CONTACTOS, null, null, null, null, null, null);
     }
 
     public int getLastInsertedId() {
@@ -110,7 +110,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return lastId;
     }
 
-
     public boolean eliminarAlarma(int id) {
         SQLiteDatabase db = this.getWritableDatabase();
         return db.delete(TABLE_NAME, COLUMN_ID + " = ?", new String[]{String.valueOf(id)}) > 0;
@@ -118,6 +117,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public boolean eliminarContacto(int id) { // Método para eliminar contacto
         SQLiteDatabase db = this.getWritableDatabase();
+        Log.d("DatabaseHelper", "Eliminando contacto con ID: " + id);
         return db.delete(TABLE_CONTACTOS, COLUMN_ID_CONTACTO + " = ?", new String[]{String.valueOf(id)}) > 0;
     }
 
