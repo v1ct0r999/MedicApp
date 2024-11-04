@@ -20,7 +20,7 @@ public class MenuContactoActivity extends AppCompatActivity {
         Button botonEditarContacto = (Button) findViewById(R.id.btnEditarContacto);
         Button botonEliminarContacto = (Button) findViewById(R.id.btnEliminar);
         Button botonVolverContacto = (Button) findViewById(R.id.btnVolverContacto);
-
+        final int contactoId = 1;
 
         // Conectar el layout menucontacto con agregarcontacto
         botonNuevoContacto.setOnClickListener(new View.OnClickListener() {
@@ -39,11 +39,10 @@ public class MenuContactoActivity extends AppCompatActivity {
         });
 
         // Conectar el layout menucontacto con eliminarcontacto
-        botonEliminarContacto.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(MenuContactoActivity.this, EliminarContactoActivity.class));
-            }
+        botonEliminarContacto.setOnClickListener(v -> {
+            Intent intent = new Intent(MenuContactoActivity.this, EliminarContactoActivity.class);
+            intent.putExtra("contactos_id", contactoId);
+            startActivity(intent);
         });
 
         // Volver al Menu

@@ -75,7 +75,7 @@ public class AlertaActivity extends AppCompatActivity {
         timerRunnable = new Runnable() {
             @Override
             public void run() {
-                if (secondsPassed < 3 * 60) { // Limitar a 3 minutos
+                if (secondsPassed < 2 * 60) { // Limitar a 2 minutos
                     secondsPassed++;
                     int minutes = secondsPassed / 60;
                     int seconds = secondsPassed % 60;

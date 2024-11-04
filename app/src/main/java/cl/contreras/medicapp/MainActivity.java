@@ -60,8 +60,16 @@ public class MainActivity extends AppCompatActivity {
 
         loadAlarmas();
 
+        ImageButton botonCalendario = (ImageButton) findViewById(R.id.calendario);
         ImageButton botonContacto = (ImageButton) findViewById(R.id.agregarcontacto);
 
+
+        botonCalendario.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, CalendarioActivity.class));
+            }
+        });
         botonContacto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -81,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
 
                 // Crear un nuevo botón grande
                 Button alarmaButton = new Button(this);
-                alarmaButton.setText("Nombre Alarma\n" + nombre + "\n\nVer detalles");
+                alarmaButton.setText("Nombre Alarma:\n" + nombre + "\n\nVer detalles");
                 alarmaButton.setLayoutParams(new LinearLayout.LayoutParams(
                         LinearLayout.LayoutParams.MATCH_PARENT,
                         400
