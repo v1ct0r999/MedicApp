@@ -20,6 +20,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import cl.contreras.medicapp.db.DatabaseHelper;
+
 public class MainActivity extends AppCompatActivity {
 
     DatabaseHelper dbHelper;

@@ -5,8 +5,10 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
@@ -99,13 +101,26 @@ public class AlertaActivity extends AppCompatActivity {
                 PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE
         );
 
-        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        AlarmManager alarmManager = (AlarmManager) getApplicationContext().getSystemService(Context.ALARM_SERVICE);
         long triggerAtMillis = System.currentTimeMillis() + SNOOZE_TIME;
 
-        // Utilizar setExactAndAllowWhileIdle para mayor compatibilidad
-        if (alarmManager != null) {
-            alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, triggerAtMillis, pendingIntent);
+        // Solo verifica el permiso si estamos en Android 12 (API 31) o superior
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            // Utilizar setExactAndAllowWhileIdle para mayor compatibilidad
+            if (alarmManager != null && alarmManager.canScheduleExactAlarms()) {
+                long trigegersArMillis = System.currentTimeMillis() + SNOOZE_TIME;
+                alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, triggerAtMillis, pendingIntent);
+            } else {
+                // Manejar el caso en que no se puede programar alarmas exactas
+                // Por ejemplo, informar al usuario que debe habilitar el permiso
+            }
+        } else {
+            // Para versiones anteriores a Android 12, puedes programar alarmas normalmente
+            long trigegersArMillis = System.currentTimeMillis() + SNOOZE_TIME;
+            alarmManager.setExact(AlarmManager.RTC_WAKEUP, triggerAtMillis, pendingIntent);
         }
+
+
     }
     private void stopAlarmSound() {
         if (mediaPlayer != null && mediaPlayer.isPlaying()) {

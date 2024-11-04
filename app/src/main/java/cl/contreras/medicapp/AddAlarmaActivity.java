@@ -10,6 +10,8 @@ import android.content.Intent;
 import java.util.Calendar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import cl.contreras.medicapp.db.DatabaseHelper;
+
 public class AddAlarmaActivity extends AppCompatActivity {
 
     DatabaseHelper dbHelper;

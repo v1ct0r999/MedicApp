@@ -13,6 +13,8 @@ import android.app.PendingIntent;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import cl.contreras.medicapp.db.DatabaseHelper;
+
 public class OpcionesAlarmaActivity extends AppCompatActivity {
 
     private TextView alarmaNombreTextView;
@@ -44,8 +46,17 @@ public class OpcionesAlarmaActivity extends AppCompatActivity {
         }
 
         // Lógica para cada botón
-        btnDetallesAlarma.setOnClickListener(v -> {
-            // Ir a la pantalla para ver detalles
+
+        // Ir a la pantalla para ver detalles
+        btnDetallesAlarma.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (alarmaId != -1) {  // Verifica que el ID de la alarma sea válido
+                    Intent intent = new Intent(OpcionesAlarmaActivity.this, DetallesAlarmasActivity.class);
+                    intent.putExtra("ID", alarmaId); // Pasa el id aquí
+                    startActivity(intent); // Luego inicia la nueva actividad
+                }
+            }
         });
 
         btnEditarAlarma.setOnClickListener(new View.OnClickListener() {
