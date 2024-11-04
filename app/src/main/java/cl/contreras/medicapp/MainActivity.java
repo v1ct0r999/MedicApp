@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -60,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
 
         ImageButton botonCalendario = (ImageButton) findViewById(R.id.calendario);
         ImageButton botonContacto = (ImageButton) findViewById(R.id.agregarcontacto);
+        ImageButton botonemergerncia = (ImageButton) findViewById(R.id.botonemergencia);
 
 
         botonCalendario.setOnClickListener(new View.OnClickListener() {
@@ -74,6 +76,26 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this, MenuContactoActivity.class));
             }
         });
+        botonemergerncia.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Supongamos que tienes el ID del contacto que quieres marcar
+                int contactoId = 1; // Cambia esto según tu lógica
+
+                // Obtener el número de teléfono de la base de datos
+                String telefono = dbHelper.getTelefonoPorId(contactoId);
+
+                if (telefono != null) {
+                    Intent accionLlamar = new Intent(Intent.ACTION_DIAL);
+                    accionLlamar.setData(Uri.parse("tel:" + telefono)); // Prepara el número para marcar
+                    startActivity(accionLlamar); // Inicia la actividad
+                } else {
+                    // Manejar el caso en que no se encuentra el número
+                    Toast.makeText(view.getContext(), "Número no encontrado", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
     }
 
     private void loadAlarmas() {
