@@ -1,4 +1,4 @@
-package cl.contreras.medicapp;
+package cl.contreras.medicapp.db;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -119,6 +119,86 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         Log.d("DatabaseHelper", "Eliminando contacto con ID: " + id);
         return db.delete(TABLE_CONTACTOS, COLUMN_ID_CONTACTO + " = ?", new String[]{String.valueOf(id)}) > 0;
+    }
+
+    public Alarmas detalleAlarma(int id){
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        Alarmas alarma = null;
+        Cursor cursorAlarmas;
+
+        cursorAlarmas = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE id = " + id, null);
+
+        if (cursorAlarmas.moveToFirst()) {
+            alarma = new Alarmas();
+            alarma.setId(cursorAlarmas.getInt(0));
+            alarma.setNombre(cursorAlarmas.getString(1));
+            alarma.setDosis(cursorAlarmas.getString(2));
+            alarma.setStock(cursorAlarmas.getString(3));
+            alarma.setFrecuencia(cursorAlarmas.getString(4));
+
+        }
+
+        cursorAlarmas.close();
+        return alarma;
+    }
+
+    //como somos autistas tenemos que hacer 3 veces la funcion por ahora porque no tengo tiempo :)
+    public boolean editarALarmaDosis(int id, String dosis) {
+
+        boolean correcto = false;
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        try {
+            db.execSQL("UPDATE" + TABLE_NAME + " SET dosis = '" + dosis + "'");
+            correcto = true;
+        } catch (Exception ex) {
+            ex.toString();
+            correcto = false;
+        } finally {
+            db.close();;
+        }
+
+        return correcto;
+
+    }
+
+    public boolean editarALarmaStock(int id, String stock) {
+
+        boolean correcto = false;
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        try {
+            db.execSQL("UPDATE" + TABLE_NAME + " SET stock = '" + stock + "'");
+            correcto = true;
+        } catch (Exception ex) {
+            ex.toString();
+            correcto = false;
+        } finally {
+            db.close();;
+        }
+
+        return correcto;
+
+    }
+
+    public boolean editarALarmaFrecuencia(int id, int frecuencia) {
+
+        boolean correcto = false;
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        try {
+            db.execSQL("UPDATE" + TABLE_NAME + " SET frecuencia = '" + frecuencia + "' ");
+            correcto = true;
+        } catch (Exception ex) {
+            ex.toString();
+            correcto = false;
+        } finally {
+            db.close();;
+        }
+
+        return correcto;
+
     }
 
 }

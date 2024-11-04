@@ -10,6 +10,8 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
+import cl.contreras.medicapp.db.DatabaseHelper;
+
 public class CalendarioActivity extends AppCompatActivity {
 
     private DatabaseHelper dbHelper;
