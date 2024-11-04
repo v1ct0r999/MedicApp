@@ -79,6 +79,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     public boolean addContacto(String nombre, String telefono) {
+        if (hayContacto()) {
+            return false; // Ya existe un contacto
+        }
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(COLUMN_NOMBRE_CONTACTO, nombre);
@@ -86,6 +89,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         long result = db.insert(TABLE_CONTACTOS, null, values);
         return result != -1;
+    }
+
+    private boolean hayContacto() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.query(TABLE_CONTACTOS, null, null, null, null, null, null);
+        boolean existe = (cursor != null && cursor.getCount() > 0);
+
+        if (cursor != null) {
+            cursor.close();
+        }
+        return existe;
     }
 
     public Cursor getAllAlarmas() {
@@ -109,6 +123,20 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
         return lastId;
     }
+
+    public String getTelefonoPorId(int id) {
+        String telefono = null;
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.query(TABLE_CONTACTOS, new String[]{COLUMN_TELEFONO}, COLUMN_ID_CONTACTO + " = ?", new String[]{String.valueOf(id)}, null, null, null);
+
+        if (cursor != null && cursor.moveToFirst()) {
+            telefono = cursor.getString(cursor.getColumnIndex(COLUMN_TELEFONO));
+            cursor.close();
+        }
+
+        return telefono;
+    }
+
 
     public boolean eliminarAlarma(int id) {
         SQLiteDatabase db = this.getWritableDatabase();
