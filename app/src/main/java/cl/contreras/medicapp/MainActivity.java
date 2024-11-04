@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -109,13 +110,14 @@ public class MainActivity extends AppCompatActivity {
 
                 // Crear un nuevo botón grande
                 Button alarmaButton = new Button(this);
-                alarmaButton.setText("Nombre Alarma:\n" + nombre + "\n\nVer detalles");
+                alarmaButton.setText(nombre + "\n\nVer detalles");
                 alarmaButton.setLayoutParams(new LinearLayout.LayoutParams(
                         LinearLayout.LayoutParams.MATCH_PARENT,
                         400
                 ));
                 alarmaButton.setPadding(10, 20, 80, 10);
                 alarmaButton.setTextSize(25);
+                alarmaButton.setBackgroundColor(Color.WHITE);
 
                 alarmaButton.setOnClickListener(v -> {
                     Intent intent = new Intent(MainActivity.this, OpcionesAlarmaActivity.class);
@@ -136,21 +138,6 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
         loadAlarmas(); // Recargar la lista cuando regrese a la actividad principal
     }
-
-    private void createNotificationChannel() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            CharSequence name = "AlarmaChannel";
-            String description = "Canal para alarmas";
-            int importance = NotificationManager.IMPORTANCE_HIGH;
-            NotificationChannel channel = new NotificationChannel("ALARMA_CHANNEL_ID", name, importance);
-            channel.setDescription(description);
-
-            NotificationManager notificationManager = getSystemService(NotificationManager.class);
-            notificationManager.createNotificationChannel(channel);
-        }
-    }
-
-
 }
 
 
