@@ -53,6 +53,7 @@ public class Splash extends AppCompatActivity {
                     // Intent para ir a la pantalla de saludo
                     Intent intent = new Intent(Splash.this, MainActivity.class);
                     startActivity(intent);
+                    finish();
                 }
             }
         });

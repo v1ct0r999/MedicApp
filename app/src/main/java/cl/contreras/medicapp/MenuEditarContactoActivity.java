@@ -54,6 +54,7 @@ public class MenuEditarContactoActivity extends AppCompatActivity {
         botonVolverEditarContacto.setOnClickListener(v -> {
             Intent menuIntent = new Intent(MenuEditarContactoActivity.this, MenuContactoActivity.class);
             startActivity(menuIntent);
+            finish();
         });
     }
 

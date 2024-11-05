@@ -56,7 +56,8 @@ public class MenuEditarAlarmaActivity extends AppCompatActivity {
         btnVolverEditarAlarma.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MenuEditarAlarmaActivity.this, OpcionesAlarmaActivity.class));
+                // Cancelar y regresar a la actividad anterior
+                finish();
             }
         });
     }

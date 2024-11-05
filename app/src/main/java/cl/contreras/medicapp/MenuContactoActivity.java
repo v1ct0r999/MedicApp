@@ -46,11 +46,9 @@ public class MenuContactoActivity extends AppCompatActivity {
         });
 
         // Volver al Menu
-        botonVolverContacto.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(MenuContactoActivity.this, MainActivity.class));
-            }
+        botonVolverContacto.setOnClickListener(v -> {
+            startActivity(new Intent(MenuContactoActivity.this, MainActivity.class));
+            finish();
         });
 
     }

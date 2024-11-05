@@ -84,6 +84,7 @@ public class OpcionesAlarmaActivity extends AppCompatActivity {
         BotonAtrasAlarma.setOnClickListener(v -> {
             Intent intent = new Intent(OpcionesAlarmaActivity.this, MainActivity.class);
             startActivity(intent);
+            finish();
         });
     }
 

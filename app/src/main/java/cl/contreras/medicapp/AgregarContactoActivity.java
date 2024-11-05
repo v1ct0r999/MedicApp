@@ -29,6 +29,7 @@ public class AgregarContactoActivity extends AppCompatActivity {
         // Volver al menu contacto
         botonVolverAgregarContacto.setOnClickListener(v -> {
             startActivity(new Intent(AgregarContactoActivity.this, MenuContactoActivity.class));
+            finish();
         });
 
         EditText Itelefono = findViewById(R.id.telefonoContacto);

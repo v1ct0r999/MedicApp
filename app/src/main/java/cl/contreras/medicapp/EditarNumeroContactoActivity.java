@@ -22,7 +22,8 @@ public class EditarNumeroContactoActivity extends AppCompatActivity {
         botonVolverEditarNumeroContacto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(EditarNumeroContactoActivity.this, MenuEditarContactoActivity.class));
+                // Cancelar y regresar a la actividad anterior
+                finish();
             }
         });
 

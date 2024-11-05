@@ -74,7 +74,8 @@ public class DetallesAlarmasActivity extends AppCompatActivity {
         Volver.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(DetallesAlarmasActivity.this, OpcionesAlarmaActivity.class));
+                // Cancelar y regresar a la actividad anterior
+                finish();
             }
         });
 

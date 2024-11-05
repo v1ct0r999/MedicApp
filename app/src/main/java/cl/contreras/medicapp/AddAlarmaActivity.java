@@ -47,7 +47,9 @@ public class AddAlarmaActivity extends AppCompatActivity {
                     int alarmaId = dbHelper.getLastInsertedId(); // Implementa este método en DatabaseHelper
                     scheduleReminder(nombre, frecuencia, alarmaId); // Usar alarmaId aquí
                     Toast.makeText(AddAlarmaActivity.this, "Alarma guardada", Toast.LENGTH_SHORT).show();
-                    finish(); // Volver a la actividad principal
+                    Intent intent = new Intent(AddAlarmaActivity.this, MainActivity.class);
+                    startActivity(intent);
+                    finish();// Volver a la actividad principal
                 } else {
                     Toast.makeText(AddAlarmaActivity.this, "Error al guardar", Toast.LENGTH_SHORT).show();
                 }
@@ -57,6 +59,7 @@ public class AddAlarmaActivity extends AppCompatActivity {
         btnCancel.setOnClickListener(v -> {
             Intent intent = new Intent(AddAlarmaActivity.this, MainActivity.class);
             startActivity(intent);
+            finish();
         });
     }
 
@@ -73,6 +76,7 @@ public class AddAlarmaActivity extends AppCompatActivity {
                 intent,
                 PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE
         );
+
 
         // Programar la alarma para que se active cada X minutos
         long triggerTime = Calendar.getInstance().getTimeInMillis() + frecuencia * 60000; // 60000 milisegundos en un minuto

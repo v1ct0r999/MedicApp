@@ -1,7 +1,10 @@
 package cl.contreras.medicapp;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import java.text.SimpleDateFormat;
@@ -9,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
+import android.view.View;
 
 import cl.contreras.medicapp.db.DatabaseHelper;
 
@@ -16,6 +20,8 @@ public class CalendarioActivity extends AppCompatActivity {
 
     private DatabaseHelper dbHelper;
     private TextView tvCalendario;
+    private LinearLayout tvNoAlarmas;
+    private Button btnVolver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,8 +30,18 @@ public class CalendarioActivity extends AppCompatActivity {
 
         dbHelper = new DatabaseHelper(this);
         tvCalendario = findViewById(R.id.tvCalendario);
+        tvNoAlarmas = findViewById(R.id.tvNoAlarmas); // Referencia al mensaje de "No existen registros"
+        btnVolver = findViewById(R.id.btnVolver);
+
 
         mostrarAlarmas();
+
+        btnVolver.setOnClickListener(v -> {
+            Intent menuIntent = new Intent(CalendarioActivity.this, MainActivity.class);
+            startActivity(menuIntent);
+            finish();
+        });
+
     }
 
     private void mostrarAlarmas() {
@@ -33,31 +49,42 @@ public class CalendarioActivity extends AppCompatActivity {
         StringBuilder calendarioTexto = new StringBuilder();
         SimpleDateFormat dayFormat = new SimpleDateFormat("EEEE", Locale.getDefault());  // Formato para el día de la semana
 
-        while (cursor.moveToNext()) {
-            String nombre = cursor.getString(cursor.getColumnIndexOrThrow("nombre"));
-            int frecuencia = cursor.getInt(cursor.getColumnIndexOrThrow("frecuencia"));
-            String horaInicial = cursor.getString(cursor.getColumnIndexOrThrow("hora_inicial"));
+        if (cursor.getCount() == 0) {
+            // Si no hay registros, muestra el mensaje de "No existen registros de medicamentos"
+            tvNoAlarmas.setVisibility(View.VISIBLE);
+            tvCalendario.setVisibility(View.GONE);
+        } else {
+            // Si hay registros, oculta el mensaje y muestra las alarmas
+            tvNoAlarmas.setVisibility(View.GONE);
+            tvCalendario.setVisibility(View.VISIBLE);
 
-            // Encabezado del medicamento
-            calendarioTexto.append("Medicamento: ").append(nombre).append("\n");
-            calendarioTexto.append("Próximas alarmas:\n");
+            while (cursor.moveToNext()) {
+                String nombre = cursor.getString(cursor.getColumnIndexOrThrow("nombre"));
+                int frecuencia = cursor.getInt(cursor.getColumnIndexOrThrow("frecuencia"));
+                String horaInicial = cursor.getString(cursor.getColumnIndexOrThrow("hora_inicial"));
 
-            // Calcula las alarmas próximas agrupadas por día
-            ArrayList<AlarmaDia> alarmasPorDia = calcularProximasAlarmasAgrupadasPorDia(horaInicial, frecuencia);
+                // Encabezado del medicamento
+                calendarioTexto.append("Medicamento: ").append(nombre).append("\n");
+                calendarioTexto.append("Próximas alarmas:\n");
 
-            String ultimoDia = "";
-            for (AlarmaDia alarmaDia : alarmasPorDia) {
-                if (!ultimoDia.equals(alarmaDia.diaSemana)) {
-                    ultimoDia = alarmaDia.diaSemana;
-                    calendarioTexto.append("Día ").append(alarmaDia.diaSemana).append(":\n");
+                // Calcula las alarmas próximas agrupadas por día
+                ArrayList<AlarmaDia> alarmasPorDia = calcularProximasAlarmasAgrupadasPorDia(horaInicial, frecuencia);
+
+                String ultimoDia = "";
+                for (AlarmaDia alarmaDia : alarmasPorDia) {
+                    if (!ultimoDia.equals(alarmaDia.diaSemana)) {
+                        ultimoDia = alarmaDia.diaSemana;
+                        calendarioTexto.append("Día ").append(alarmaDia.diaSemana).append(":\n");
+                    }
+                    calendarioTexto.append("   ").append(alarmaDia.hora).append("\n");
                 }
-                calendarioTexto.append("   ").append(alarmaDia.hora).append("\n");
+                calendarioTexto.append("\n");
             }
-            calendarioTexto.append("\n");
+
+            tvCalendario.setText(calendarioTexto.toString());
         }
 
         cursor.close();
-        tvCalendario.setText(calendarioTexto.toString());
     }
 
     // Clase auxiliar para manejar alarmas por día y hora
@@ -94,5 +121,5 @@ public class CalendarioActivity extends AppCompatActivity {
         }
         return proximasAlarmas;
     }
-
 }
+

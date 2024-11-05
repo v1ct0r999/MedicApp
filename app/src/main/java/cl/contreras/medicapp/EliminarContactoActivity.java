@@ -48,6 +48,7 @@ public class EliminarContactoActivity extends AppCompatActivity {
         // Volver al Menu Contacto
         botonVolverEliminarContacto.setOnClickListener(v -> {
             startActivity(new Intent(EliminarContactoActivity.this, MenuContactoActivity.class));
+            finish();
         });
 
         btneliminarcontacto.setOnClickListener(v -> {
@@ -57,6 +58,9 @@ public class EliminarContactoActivity extends AppCompatActivity {
                     .setPositiveButton("Sí", (dialogInterface, i) -> eliminarContacto(contactoId))
                     .setNegativeButton("No", null)
                     .show();
+
+            Intent intent = new Intent(EliminarContactoActivity.this, MenuContactoActivity.class);
+            startActivity(intent);
         });
     }
 
@@ -81,8 +85,8 @@ public class EliminarContactoActivity extends AppCompatActivity {
         Cursor cursor = dbHelper.getAllContactos();
         if (cursor != null && cursor.moveToFirst()) {
             // Obtener el nombre y teléfono del primer contacto (el más reciente)
-            String nombre = cursor.getString(cursor.getColumnIndex(DatabaseHelper.COLUMN_NOMBRE_CONTACTO));
-            String telefono = cursor.getString(cursor.getColumnIndex(DatabaseHelper.COLUMN_TELEFONO));
+            String nombre = cursor.getString(cursor.getColumnIndexOrThrow(DatabaseHelper.COLUMN_NOMBRE_CONTACTO));
+            String telefono = cursor.getString(cursor.getColumnIndexOrThrow(DatabaseHelper.COLUMN_TELEFONO));
             nombrecontactotextview.setText(nombre);
             telefonocontactotextview.setText(telefono);
             cursor.close();

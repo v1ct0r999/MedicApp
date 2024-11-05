@@ -16,6 +16,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
@@ -27,8 +28,10 @@ import cl.contreras.medicapp.db.DatabaseHelper;
 public class MainActivity extends AppCompatActivity {
 
     DatabaseHelper dbHelper;
-    LinearLayout alarmaLayout;
     private SharedPreferences sharedPreferences;
+    private LinearLayout tvNoAlarmas;
+    private LinearLayout alarmaLayout;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,11 +56,13 @@ public class MainActivity extends AppCompatActivity {
 
         dbHelper = new DatabaseHelper(this);
         alarmaLayout = findViewById(R.id.alarmaLayout);
+        tvNoAlarmas = findViewById(R.id.tvNoAlarmas);
         Button btnAddAlarma = findViewById(R.id.btnAddAlarma);
 
         btnAddAlarma.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, AddAlarmaActivity.class);
             startActivity(intent);
+            finish();
         });
 
         loadAlarmas();
@@ -71,12 +76,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this, CalendarioActivity.class));
+                finish();
             }
         });
         botonContacto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this, MenuContactoActivity.class));
+                finish();
             }
         });
 
@@ -107,6 +114,8 @@ public class MainActivity extends AppCompatActivity {
         Cursor cursor = dbHelper.getAllAlarmas();
 
         if (cursor.moveToFirst()) {
+            tvNoAlarmas.setVisibility(View.GONE);
+            alarmaLayout.setVisibility(View.VISIBLE);
             do {
                 int id = cursor.getInt(0);  // Obtener ID de la alarma
                 String nombre = cursor.getString(1);
@@ -114,10 +123,12 @@ public class MainActivity extends AppCompatActivity {
                 // Crear un nuevo botón grande
                 Button alarmaButton = new Button(this);
                 alarmaButton.setText(nombre + "\n\nVer detalles");
-                alarmaButton.setLayoutParams(new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
                         LinearLayout.LayoutParams.MATCH_PARENT,
                         400
-                ));
+                );
+                params.setMargins(0, 20, 0, 20); // Margen superior e inferior de 20px
+                alarmaButton.setLayoutParams(params);
                 alarmaButton.setPadding(10, 20, 80, 20);
                 alarmaButton.setTextSize(25);
                 alarmaButton.setBackgroundColor(Color.WHITE);
@@ -130,9 +141,11 @@ public class MainActivity extends AppCompatActivity {
 
                 // Agregar el botón al layout dinámico
                 alarmaLayout.addView(alarmaButton);
+
             } while (cursor.moveToNext());
         } else {
-            Toast.makeText(this, "No hay alarmas disponibles", Toast.LENGTH_SHORT).show();
+            tvNoAlarmas.setVisibility(View.VISIBLE);
+            alarmaLayout.setVisibility(View.GONE);
         }
     }
 
@@ -142,5 +155,3 @@ public class MainActivity extends AppCompatActivity {
         loadAlarmas(); // Recargar la lista cuando regrese a la actividad principal
     }
 }
-
-
