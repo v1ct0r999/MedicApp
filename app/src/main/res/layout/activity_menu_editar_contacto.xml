@@ -166,10 +166,10 @@
 
             <Button
                 android:id="@+id/btnEditarNombreContacto"
-                android:layout_width="250dp"
+                android:layout_width="300dp"
                 android:layout_height="80dp"
-                android:layout_centerInParent="true"
                 android:layout_marginBottom="16dp"
+                android:layout_centerInParent="true"
                 android:text="Editar Nombre"
                 android:textSize="25dp"
                 android:textStyle="bold"
@@ -194,10 +194,10 @@
 
             <Button
                 android:id="@+id/btnEditarFonoContacto"
-                android:layout_width="250dp"
+                android:layout_width="300dp"
                 android:layout_height="80dp"
-                android:layout_centerInParent="true"
                 android:layout_marginBottom="16dp"
+                android:layout_centerInParent="true"
                 android:text="Editar Numero"
                 android:textSize="25dp"
                 android:textStyle="bold"
@@ -220,10 +220,10 @@
 
             <Button
                 android:id="@+id/btnVolverEditarContacto"
-                android:layout_width="250dp"
+                android:layout_width="300dp"
                 android:layout_height="80dp"
-                android:layout_centerInParent="true"
                 android:layout_marginBottom="16dp"
+                android:layout_centerInParent="true"
                 android:text="Volver"
                 android:textSize="25dp"
                 android:textStyle="bold"

@@ -81,7 +81,7 @@ public class AlertaActivity extends AppCompatActivity {
                     textViewTimer.setText(String.format("%02d:%02d", minutes, seconds));
                     handler.postDelayed(this, 1000); // Actualizar cada segundo
                 } else {
-                    finish(); // Detener la alarma después de 3 minutos
+                    finish(); // Detener la alarma después de 2 minutos
                 }
             }
         };

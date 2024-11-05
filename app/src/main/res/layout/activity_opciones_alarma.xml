@@ -54,8 +54,8 @@
 
             <Button
                 android:id="@+id/btnDetallesAlarma"
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
+                android:layout_width="300dp"
+                android:layout_height="80dp"
                 android:layout_marginBottom="16dp"
                 android:backgroundTint="@color/cyan"
                 android:text="Ver Detalles Alarma"
@@ -74,13 +74,13 @@
             android:layout_height="match_parent">
             <Button
                 android:id="@+id/btnEditarAlarma"
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
+                android:layout_width="300dp"
+                android:layout_height="80dp"
+                android:layout_marginBottom="16dp"
                 android:text="Editar Alarma"
                 android:textSize="25dp"
                 android:backgroundTint="@color/cyan"
                 android:textColor="@android:color/black"
-                android:layout_marginBottom="16dp"
                 android:textStyle="bold"
                 android:layout_centerInParent="true"/>
         </RelativeLayout>
@@ -94,8 +94,9 @@
             android:layout_height="match_parent">
             <Button
                 android:id="@+id/btnEliminarAlarma"
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
+                android:layout_width="300dp"
+                android:layout_height="80dp"
+                android:layout_marginBottom="16dp"
                 android:text="Eliminar Alarma"
                 android:textSize="25dp"
                 android:backgroundTint="@color/rojo"
@@ -113,13 +114,11 @@
             android:layout_height="match_parent">
             <Button
                 android:id="@+id/BotonAtrasAlarma"
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
+                android:layout_width="300dp"
+                android:layout_height="80dp"
+                android:layout_marginBottom="16dp"
                 android:text="Volver"
                 android:textSize="25dp"
-                android:backgroundTint="@color/cyan"
-                android:textColor="@android:color/black"
-                android:layout_marginBottom="16dp"
                 android:textStyle="bold"
                 android:layout_centerInParent="true"/>
         </RelativeLayout>

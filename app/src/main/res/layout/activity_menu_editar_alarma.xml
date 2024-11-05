@@ -51,10 +51,10 @@
 
             <Button
                 android:id="@+id/btnEditarDosis"
-                android:layout_width="250dp"
+                android:layout_width="300dp"
                 android:layout_height="80dp"
-                android:layout_centerInParent="true"
                 android:layout_marginBottom="16dp"
+                android:layout_centerInParent="true"
                 android:text="Editar Dosis"
                 android:textSize="25dp"
                 android:textStyle="bold"
@@ -79,10 +79,10 @@
 
             <Button
                 android:id="@+id/btnEditarFrecuencia"
-                android:layout_width="250dp"
+                android:layout_width="300dp"
                 android:layout_height="80dp"
-                android:layout_centerInParent="true"
                 android:layout_marginBottom="16dp"
+                android:layout_centerInParent="true"
                 android:text="Editar Frecuencia"
                 android:textSize="25dp"
                 android:textStyle="bold"
@@ -105,10 +105,10 @@
 
             <Button
                 android:id="@+id/btnEditarStock"
-                android:layout_width="250dp"
+                android:layout_width="300dp"
                 android:layout_height="80dp"
-                android:layout_centerInParent="true"
                 android:layout_marginBottom="16dp"
+                android:layout_centerInParent="true"
                 android:text="Editar Stock"
                 android:textSize="25dp"
                 android:textStyle="bold"
@@ -131,10 +131,10 @@
 
             <Button
                 android:id="@+id/btnVolverEditarAlarma"
-                android:layout_width="250dp"
+                android:layout_width="300dp"
                 android:layout_height="80dp"
-                android:layout_centerInParent="true"
                 android:layout_marginBottom="16dp"
+                android:layout_centerInParent="true"
                 android:text="Volver"
                 android:textSize="25dp"
                 android:textStyle="bold"

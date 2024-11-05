@@ -79,6 +79,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this, MenuContactoActivity.class));
             }
         });
+
         botonemergerncia.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -117,7 +118,7 @@ public class MainActivity extends AppCompatActivity {
                         LinearLayout.LayoutParams.MATCH_PARENT,
                         400
                 ));
-                alarmaButton.setPadding(10, 20, 80, 10);
+                alarmaButton.setPadding(10, 20, 80, 20);
                 alarmaButton.setTextSize(25);
                 alarmaButton.setBackgroundColor(Color.WHITE);
 

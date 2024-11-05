@@ -109,12 +109,12 @@ public class OpcionesAlarmaActivity extends AppCompatActivity {
     private void cancelarAlarma(int alarmaId) {
         AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
         Intent intent = new Intent(OpcionesAlarmaActivity.this, ReminderBroadcastReceiver.class);
-        intent.putExtra("alarma_id", alarmaId); // Se envía el ID de la alarma
+        intent.putExtra("nombre_alarma", ""); // Agrega el mismo extra que en el scheduleReminder si es necesario
 
-        // Crear el PendingIntent con el mismo requestCode que se utilizó para programar la alarma
+        // Usar alarmaId como requestCode
         PendingIntent pendingIntent = PendingIntent.getBroadcast(
                 this,
-                0,
+                alarmaId, // Asegúrate de usar alarmaId aquí también
                 intent,
                 PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE
         );
@@ -124,4 +124,5 @@ public class OpcionesAlarmaActivity extends AppCompatActivity {
             alarmManager.cancel(pendingIntent);
         }
     }
+
 }

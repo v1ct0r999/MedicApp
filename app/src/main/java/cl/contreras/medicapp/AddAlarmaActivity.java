@@ -66,13 +66,12 @@ public class AddAlarmaActivity extends AppCompatActivity {
         Intent intent = new Intent(AddAlarmaActivity.this, ReminderBroadcastReceiver.class);
         intent.putExtra("nombre_alarma", nombre);
 
-        // Usar alarmaId como requestCode
+        // Usar alarmaId como requestCode para que cada alarma sea única
         PendingIntent pendingIntent = PendingIntent.getBroadcast(
                 this,
-                0,
+                alarmaId, // Cambiado para usar el ID único de la alarma
                 intent,
                 PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE
-
         );
 
         // Programar la alarma para que se active cada X minutos
@@ -81,4 +80,5 @@ public class AddAlarmaActivity extends AppCompatActivity {
         // Configurar una alarma repetitiva
         alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, triggerTime, frecuencia * 60000, pendingIntent);
     }
+
 }
