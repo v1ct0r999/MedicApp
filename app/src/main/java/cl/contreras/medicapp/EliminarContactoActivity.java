@@ -58,9 +58,6 @@ public class EliminarContactoActivity extends AppCompatActivity {
                     .setPositiveButton("Sí", (dialogInterface, i) -> eliminarContacto(contactoId))
                     .setNegativeButton("No", null)
                     .show();
-
-            Intent intent = new Intent(EliminarContactoActivity.this, MenuContactoActivity.class);
-            startActivity(intent);
         });
     }
 
@@ -73,11 +70,10 @@ public class EliminarContactoActivity extends AppCompatActivity {
         } else {
             Toast.makeText(this, "Error al eliminar el contacto", Toast.LENGTH_SHORT).show();
         }
-
         Intent intent = new Intent(EliminarContactoActivity.this, MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(intent);
-        finish();  // Cierra esta actividad
+        startActivity(intent);// Cierra esta actividad
+        finish();
     }
 
 

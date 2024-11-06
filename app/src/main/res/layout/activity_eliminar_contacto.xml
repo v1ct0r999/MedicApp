@@ -205,9 +205,8 @@
                         android:layout_height="wrap_content"
                         android:height="75dp"
                         android:text="Eliminar"
-                        android:textStyle="bold"
                         android:textSize="30dp"
-                        android:layout_centerHorizontal="true" />
+                        android:textStyle="bold" />
 
                 </RelativeLayout>
 
