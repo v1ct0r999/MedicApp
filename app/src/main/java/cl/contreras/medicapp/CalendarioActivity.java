@@ -13,6 +13,7 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 import android.view.View;
+import java.util.Calendar;
 
 import cl.contreras.medicapp.db.DatabaseHelper;
 
@@ -102,12 +103,20 @@ public class CalendarioActivity extends AppCompatActivity {
         ArrayList<AlarmaDia> proximasAlarmas = new ArrayList<>();
         SimpleDateFormat sdfHora = new SimpleDateFormat("HH:mm", Locale.getDefault());
         SimpleDateFormat sdfDia = new SimpleDateFormat("EEEE", Locale.getDefault());
+        Calendar calendarioActual = Calendar.getInstance(); // Fecha y hora actuales
 
         try {
+            // Parsear la hora inicial con la fecha actual
             Date horaInicio = sdfHora.parse(horaInicial);
+            if (horaInicio != null) {
+                calendarioActual.set(Calendar.HOUR_OF_DAY, horaInicio.getHours());
+                calendarioActual.set(Calendar.MINUTE, horaInicio.getMinutes());
+                calendarioActual.set(Calendar.SECOND, 0);
+            }
 
+            // Calcular las próximas alarmas
             for (int i = 0; i < 7 * (24 / frecuencia); i++) { // calcula 7 días de alarmas
-                long proximaHora = horaInicio.getTime() + TimeUnit.HOURS.toMillis(i * frecuencia);
+                long proximaHora = calendarioActual.getTimeInMillis() + TimeUnit.HOURS.toMillis(i * frecuencia);
                 Date proximaFecha = new Date(proximaHora);
 
                 String diaSemana = sdfDia.format(proximaFecha);  // Día de la semana
@@ -121,5 +130,5 @@ public class CalendarioActivity extends AppCompatActivity {
         }
         return proximasAlarmas;
     }
-}
 
+}
