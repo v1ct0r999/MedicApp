@@ -13,21 +13,54 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="8">
-        <RelativeLayout
+        android:layout_weight="8"
+        android:orientation="horizontal">
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <TextView
-                android:id="@+id/Saludo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Buenos días"
-                android:textColor="@color/black"
-                android:textSize="25dp">
-            </TextView>
-        </RelativeLayout>
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_weight="1">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <TextView
+                    android:id="@+id/Saludo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Buenos días"
+                    android:textColor="@color/black"
+                    android:textSize="22dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerInParent="true">
+                </TextView>
+            </RelativeLayout>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="2">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <Button
+                    android:id="@+id/btncerrarsesion"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:text="Cerrar Sesion"
+                    android:textSize="14dp"
+                    android:textColor="@color/black"
+                    android:layout_alignParentRight="true"
+                    android:backgroundTint="@color/nose">
+
+                </Button>
+
+            </RelativeLayout>
+        </LinearLayout>
+
 
     </LinearLayout>
+
 
 
 
@@ -49,7 +82,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1">
+                android:layout_weight="2">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -103,7 +136,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1">
+                android:layout_weight="2">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -237,7 +270,7 @@
                     android:id="@+id/btnAddAlarma"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="30dp"
+                    android:textSize="30sp"
                     android:textColor="@color/black"
                     android:text="Añadir Alarma"
                     android:layout_centerInParent="true"

@@ -32,6 +32,10 @@ public class Splash extends AppCompatActivity {
         if (savedName != null) {
             EditTextUsuario.setText(savedName);
         }
+        if (savedName != null){
+            startActivity(new Intent(Splash.this, MainActivity.class));
+            finish();
+        }
 
         // Al hacer clic en el botón de login
         btnEntrar.setOnClickListener(new View.OnClickListener() {
@@ -39,6 +43,7 @@ public class Splash extends AppCompatActivity {
             public void onClick(View v) {
                 // Obtener el texto del EditText
                 String name = EditTextUsuario.getText().toString().trim();
+                EditTextUsuario.setText("");
 
                 // Validar si el campo de nombre está vacío
                 if (name.isEmpty()) {
