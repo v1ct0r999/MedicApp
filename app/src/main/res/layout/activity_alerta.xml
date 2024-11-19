@@ -121,7 +121,8 @@
                     android:layout_height="70dp"
                     android:layout_centerInParent="true"
                     android:backgroundTint="@color/rojo"
-                    android:text="Detener Alarma"
+                    android:textAlignment="center"
+                    android:text="Tomar medicamento y Detener Alarma"
                     android:textColor="@color/white"
                     android:textSize="20sp" />
             </RelativeLayout>

@@ -38,8 +38,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String createTable = "CREATE TABLE " + TABLE_NAME + " (" +
                 COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 COLUMN_NOMBRE + " TEXT, " +
-                COLUMN_DOSIS + " TEXT, " +
-                COLUMN_STOCK + " TEXT, " +
+                COLUMN_DOSIS + " INTEGER, " + // Cambiado a INTEGER
+                COLUMN_STOCK + " INTEGER, " + // Cambiado a INTEGER
                 COLUMN_FRECUENCIA + " INTEGER, " +
                 COLUMN_HORA_INICIAL + " TEXT)";
         db.execSQL(createTable);
@@ -62,7 +62,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
 
-    public boolean addAlarma(String nombre, String dosis, String stock, int frecuencia) {
+    public boolean addAlarma(String nombre, int dosis, int stock, int frecuencia) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(COLUMN_NOMBRE, nombre);
@@ -70,7 +70,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(COLUMN_STOCK, stock);
         values.put(COLUMN_FRECUENCIA, frecuencia);
 
-        // Registrar la hora actual como hora inicial
         String horaInicial = new SimpleDateFormat("HH:mm", Locale.getDefault()).format(new Date());
         values.put(COLUMN_HORA_INICIAL, horaInicial);
 
@@ -171,62 +170,25 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return alarma;
     }
 
-    //como somos autistas tenemos que hacer 3 veces la funcion por ahora porque no tengo tiempo :)
-    public boolean editarALarmaDosis(int id, String dosis) {
-
-        boolean correcto = false;
+    public boolean editarAlarmaDosis(int id, int dosis) {
         SQLiteDatabase db = this.getWritableDatabase();
-
-        try {
-            db.execSQL("UPDATE" + TABLE_NAME + " SET dosis = '" + dosis + "'");
-            correcto = true;
-        } catch (Exception ex) {
-            ex.toString();
-            correcto = false;
-        } finally {
-            db.close();;
-        }
-
-        return correcto;
-
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_DOSIS, dosis);
+        return db.update(TABLE_NAME, values, COLUMN_ID + " = ?", new String[]{String.valueOf(id)}) > 0;
     }
 
-    public boolean editarALarmaStock(int id, String stock) {
-
-        boolean correcto = false;
+    public boolean editarAlarmaStock(int id, int stock) {
         SQLiteDatabase db = this.getWritableDatabase();
-
-        try {
-            db.execSQL("UPDATE" + TABLE_NAME + " SET stock = '" + stock + "'");
-            correcto = true;
-        } catch (Exception ex) {
-            ex.toString();
-            correcto = false;
-        } finally {
-            db.close();;
-        }
-
-        return correcto;
-
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_STOCK, stock);
+        return db.update(TABLE_NAME, values, COLUMN_ID + " = ?", new String[]{String.valueOf(id)}) > 0;
     }
 
-    public boolean editarALarmaFrecuencia(int id, int frecuencia) {
-
-        boolean correcto = false;
+    public boolean editarAlarmaFrecuencia(int id, int frecuencia) {
         SQLiteDatabase db = this.getWritableDatabase();
-
-        try {
-            db.execSQL("UPDATE" + TABLE_NAME + " SET frecuencia = '" + frecuencia + "' ");
-            correcto = true;
-        } catch (Exception ex) {
-            ex.toString();
-            correcto = false;
-        } finally {
-            db.close();;
-        }
-
-        return correcto;
-
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_FRECUENCIA, frecuencia);
+        return db.update(TABLE_NAME, values, COLUMN_ID + " = ?", new String[]{String.valueOf(id)}) > 0;
     }
 
 }

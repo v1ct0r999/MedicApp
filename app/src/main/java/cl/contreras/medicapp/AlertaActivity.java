@@ -12,6 +12,12 @@ import android.widget.Button;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import android.media.MediaPlayer;
+import android.util.Log;
+
+
+import cl.contreras.medicapp.db.Alarmas;
+import cl.contreras.medicapp.db.DatabaseHelper;
+
 
 public class AlertaActivity extends AppCompatActivity {
 
@@ -41,6 +47,7 @@ public class AlertaActivity extends AppCompatActivity {
         // Obtener el nombre del evento desde el Intent
         Intent intent = getIntent();
         String alarmaNombre = intent.getStringExtra("nombre_alarma");
+        int alarmaId = getIntent().getIntExtra("alarma_id", -1);
 
         // Mostrar el nombre del evento en la alarma
         TextView textViewAlarma = findViewById(R.id.textViewAlarma);
@@ -57,9 +64,16 @@ public class AlertaActivity extends AppCompatActivity {
         // Botón para detener la alarma
         Button btnStopAlarm = findViewById(R.id.btnStopAlarm);
         btnStopAlarm.setOnClickListener(v -> {
+            if (alarmaId != -1) { // Usar la variable declarada anteriormente
+                reducirStock(alarmaId); // Disminuir el stock
+            } else {
+                Log.e("AlertaActivity", "ID de alarma no encontrado en el Intent.");
+            }
             stopAlarmSound(); // Detener el sonido
             finish();
         });
+
+
 
         // Botón para posponer la alarma 15 minutos
         Button btnSnooze = findViewById(R.id.btnSnooze);
@@ -118,9 +132,34 @@ public class AlertaActivity extends AppCompatActivity {
             long trigegersArMillis = System.currentTimeMillis() + SNOOZE_TIME;
             alarmManager.setExact(AlarmManager.RTC_WAKEUP, triggerAtMillis, pendingIntent);
         }
-
-
     }
+
+    private void reducirStock(int alarmaId) {
+        DatabaseHelper dbHelper = new DatabaseHelper(this);
+        Alarmas alarma = dbHelper.detalleAlarma(alarmaId);
+
+        if (alarma != null) {
+            int dosis = Integer.parseInt(alarma.getDosis());
+            int stockActual = Integer.parseInt(alarma.getStock());
+
+            if (stockActual >= dosis) {
+                int nuevoStock = stockActual - dosis;
+                boolean actualizado = dbHelper.editarAlarmaStock(alarmaId, nuevoStock);
+
+                if (actualizado) {
+                    Log.d("AlertaActivity", "Stock actualizado a: " + nuevoStock);
+                } else {
+                    Log.e("AlertaActivity", "Error al actualizar el stock.");
+                }
+            } else {
+                Log.w("AlertaActivity", "No hay suficiente stock para esta dosis.");
+            }
+        } else {
+            Log.e("AlertaActivity", "No se encontró la alarma con ID: " + alarmaId);
+        }
+    }
+
+
     private void stopAlarmSound() {
         if (mediaPlayer != null && mediaPlayer.isPlaying()) {
             mediaPlayer.stop();
