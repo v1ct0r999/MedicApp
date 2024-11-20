@@ -61,7 +61,11 @@ public class OpcionesAlarmaActivity extends AppCompatActivity {
         btnEditarAlarma.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(OpcionesAlarmaActivity.this, MenuEditarAlarmaActivity.class));
+                if (alarmaId != -1) {  // Verifica que el ID de la alarma sea válido
+                    Intent intent = new Intent(OpcionesAlarmaActivity.this, MenuEditarAlarmaActivity.class);
+                    intent.putExtra("alarma_id", alarmaId);
+                    startActivity(intent);
+                }
             }
         });
 

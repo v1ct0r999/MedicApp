@@ -16,12 +16,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "alarma.db";
     private static final int DATABASE_VERSION = 4;
 
-    private static final String TABLE_NAME = "alarmas";
-    private static final String COLUMN_ID = "id";
+    public static final String TABLE_NAME = "alarmas";
+    public static final String COLUMN_ID = "id";
     private static final String COLUMN_NOMBRE = "nombre";
-    private static final String COLUMN_DOSIS = "dosis";
-    private static final String COLUMN_STOCK = "stock";
-    private static final String COLUMN_FRECUENCIA = "frecuencia";
+    public static final String COLUMN_DOSIS = "dosis";
+    public static final String COLUMN_STOCK = "stock";
+    public static final String COLUMN_FRECUENCIA = "frecuencia";
     private static final String COLUMN_HORA_INICIAL = "hora_inicial";
 
     private static final String TABLE_CONTACTOS = "contactos";
