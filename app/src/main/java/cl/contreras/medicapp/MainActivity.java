@@ -165,10 +165,12 @@ public class MainActivity extends AppCompatActivity {
                 alarmaButton.setPadding(10, 20, 80, 20);
                 alarmaButton.setTextSize(25);
                 alarmaButton.setBackgroundColor(Color.WHITE);
+                alarmaButton.setTextColor(Color.BLACK);
 
                 alarmaButton.setOnClickListener(v -> {
                     Intent intent = new Intent(MainActivity.this, OpcionesAlarmaActivity.class);
                     intent.putExtra("alarma_id", id);  // Enviar el ID de la alarma
+                    intent.putExtra("alarma_nombre", nombre);
                     startActivity(intent);
                 });
 

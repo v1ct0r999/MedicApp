@@ -31,7 +31,7 @@ public class OpcionesAlarmaActivity extends AppCompatActivity {
 
         // Obtener el ID y nombre de la alarma desde el Intent
         alarmaId = getIntent().getIntExtra("alarma_id", -1); // Recibir el ID de la alarma
-        String alarmaNombre = getIntent().getStringExtra("alarma_nombre"); // Nombre opcional
+        String alarmaNombre = getIntent().getStringExtra("alarma_nombre");
 
         // Referencias a los elementos de la vista
         alarmaNombreTextView = findViewById(R.id.alarmaNombreTextView);
@@ -40,7 +40,6 @@ public class OpcionesAlarmaActivity extends AppCompatActivity {
         btnEliminarAlarma = findViewById(R.id.btnEliminarAlarma);
         BotonAtrasAlarma = findViewById(R.id.BotonAtrasAlarma);
 
-        // Mostrar el nombre de la alarma en el TextView si está disponible
         if (alarmaNombre != null) {
             alarmaNombreTextView.setText(alarmaNombre);
         }

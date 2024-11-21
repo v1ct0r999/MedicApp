@@ -17,15 +17,16 @@ public class MenuEditarContactoActivity extends AppCompatActivity {
     private TextView nombrecontactoTextView; // Para mostrar el nombre
     private TextView telefonocontactoTextView; // Para mostrar el teléfono
     private DatabaseHelper dbHelper;
+    private int contactoId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_menu_editar_contacto);
 
         // Inicializar el DatabaseHelper
         dbHelper = new DatabaseHelper(this);
+        contactoId = getIntent().getIntExtra("contactos_id", -1);
 
         // Inicializar los TextViews
         nombrecontactoTextView = findViewById(R.id.nombrecontacto);
@@ -38,16 +39,16 @@ public class MenuEditarContactoActivity extends AppCompatActivity {
         // Mostrar el último contacto guardado
         mostrarUltimoContacto();
 
-        // Conectar el layout EditarContacto con EditarNombreContacto
         botonEditarNombreContacto.setOnClickListener(v -> {
-            Intent editNameIntent = new Intent(MenuEditarContactoActivity.this, EditarNombreContactoActivity.class);
-            startActivity(editNameIntent);
+            Intent intent = new Intent(MenuEditarContactoActivity.this, EditarNombreContactoActivity.class);
+            intent.putExtra("contactos_id", contactoId);
+            startActivity(intent);
         });
 
-        // Conectar el layout EditarContacto con EditarNumeroContacto
         botonEditarFonoContacto.setOnClickListener(v -> {
-            Intent editPhoneIntent = new Intent(MenuEditarContactoActivity.this, EditarNumeroContactoActivity.class);
-            startActivity(editPhoneIntent);
+            Intent intent = new Intent(MenuEditarContactoActivity.this, EditarNumeroContactoActivity.class);
+            intent.putExtra("contactos_id", contactoId);
+            startActivity(intent);
         });
 
         // Volver al MenuContacto

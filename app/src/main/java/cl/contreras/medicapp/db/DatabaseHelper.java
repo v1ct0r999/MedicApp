@@ -18,13 +18,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public static final String TABLE_NAME = "alarmas";
     public static final String COLUMN_ID = "id";
-    private static final String COLUMN_NOMBRE = "nombre";
+    public static final String COLUMN_NOMBRE = "nombre";
     public static final String COLUMN_DOSIS = "dosis";
     public static final String COLUMN_STOCK = "stock";
     public static final String COLUMN_FRECUENCIA = "frecuencia";
     private static final String COLUMN_HORA_INICIAL = "hora_inicial";
 
-    private static final String TABLE_CONTACTOS = "contactos";
+    public static final String TABLE_CONTACTOS = "contactos";
     public static final String COLUMN_ID_CONTACTO = "id"; // ID para contactos
     public static final String COLUMN_NOMBRE_CONTACTO = "nombre"; // Nombre del contacto
     public static final String COLUMN_TELEFONO = "telefono"; // Teléfono del contacto
@@ -189,6 +189,20 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         values.put(COLUMN_FRECUENCIA, frecuencia);
         return db.update(TABLE_NAME, values, COLUMN_ID + " = ?", new String[]{String.valueOf(id)}) > 0;
+    }
+
+    public boolean editarNombreContacto(int id, String nombre) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_NOMBRE_CONTACTO, nombre);
+        return db.update(TABLE_CONTACTOS, values, COLUMN_ID_CONTACTO + " = ?", new String[]{String.valueOf(id)}) > 0;
+    }
+
+    public boolean editarNumeroContacto(int id, String telefono) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_TELEFONO, telefono);
+        return db.update(TABLE_CONTACTOS, values, COLUMN_ID_CONTACTO + " = ?", new String[]{String.valueOf(id)}) > 0;
     }
 
 }

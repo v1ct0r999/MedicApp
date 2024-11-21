@@ -84,7 +84,8 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:textSize="22dp"
-                    android:textColor="@color/black"/>
+                    android:textColor="@color/black"
+                    android:text="nombre"/>
 
             </RelativeLayout>
 
@@ -140,7 +141,8 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:textSize="20dp"
-                    android:textColor="@color/black"/>
+                    android:textColor="@color/black"
+                    android:text="dosis"/>
 
             </RelativeLayout>
 
@@ -202,7 +204,8 @@
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:textSize="20dp"
-                        android:textColor="@color/black"/>
+                        android:textColor="@color/black"
+                        android:text="stock"/>
 
 
                 </RelativeLayout>
@@ -259,6 +262,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
+                    android:text="frecuencia"
                     android:textSize="20dp"
                     android:textColor="@color/black"/>
 
@@ -290,10 +294,11 @@
                     android:layout_height="wrap_content"
                     android:height="70dp"
                     android:text="Volver"
-                    android:textColor="@color/white"
                     android:textStyle="bold"
                     android:textSize="30dp"
-                    android:layout_centerInParent="true" />
+                    android:layout_centerInParent="true"
+                    android:textColor="@color/white"
+                    android:backgroundTint="@color/morado"/>
 
             </RelativeLayout>
 

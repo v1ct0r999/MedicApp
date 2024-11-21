@@ -120,7 +120,9 @@
                 android:text="Volver"
                 android:textSize="25dp"
                 android:textStyle="bold"
-                android:layout_centerInParent="true"/>
+                android:layout_centerInParent="true"
+                android:textColor="@color/white"
+                android:backgroundTint="@color/morado"/>
         </RelativeLayout>
     </LinearLayout>
 

@@ -13,7 +13,6 @@ public class MenuContactoActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_menu_contacto);
 
         Button botonNuevoContacto = (Button) findViewById(R.id.btnNuevoContacto);
@@ -30,12 +29,10 @@ public class MenuContactoActivity extends AppCompatActivity {
             }
         });
 
-        // Conectar el layout menucontacto con editarcontacto
-        botonEditarContacto.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(MenuContactoActivity.this, MenuEditarContactoActivity.class));
-            }
+        botonEditarContacto.setOnClickListener(v -> {
+            Intent intent = new Intent(MenuContactoActivity.this, MenuEditarContactoActivity.class);
+            intent.putExtra("contactos_id", contactoId);
+            startActivity(intent);
         });
 
         // Conectar el layout menucontacto con eliminarcontacto

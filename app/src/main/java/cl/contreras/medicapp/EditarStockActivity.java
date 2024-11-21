@@ -47,14 +47,14 @@ public class EditarStockActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Obtener el valor ingresado por el usuario
-                String nuevost = textViewStockActual.getText().toString().trim();
+                String nuevoStock = editTextNuevoStock.getText().toString().trim();
 
                 // Verificar que se haya ingresado una nueva dosis
-                if (nuevost.isEmpty()) {
+                if (nuevoStock.isEmpty()) {
                     Toast.makeText(EditarStockActivity.this, "Por favor ingrese un nuevo stock.", Toast.LENGTH_SHORT).show();
                 } else {
                     // Llamar a la función para actualizar la dosis en la base de datos
-                    actualizarstock(nuevost);
+                    actualizarstock(nuevoStock);
                 }
             }
         });

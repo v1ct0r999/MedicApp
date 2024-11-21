@@ -138,7 +138,8 @@
                 android:text="Volver"
                 android:textSize="25dp"
                 android:textStyle="bold"
-                android:textColor="@android:color/white" />
+                android:textColor="@color/white"
+                android:backgroundTint="@color/morado"/>
         </RelativeLayout>
 
     </LinearLayout>
