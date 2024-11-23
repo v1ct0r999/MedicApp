@@ -13,6 +13,11 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import android.media.MediaPlayer;
 import android.util.Log;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
+import android.view.WindowManager;
 
 
 import cl.contreras.medicapp.db.Alarmas;
@@ -32,7 +37,10 @@ public class AlertaActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_alerta);
+
+        crearCanalDeNotificacion();
 
         TextView RecordatorioNombre = findViewById(R.id.RecordatorioNombre);
 
@@ -148,6 +156,7 @@ public class AlertaActivity extends AppCompatActivity {
 
                 if (actualizado) {
                     Log.d("AlertaActivity", "Stock actualizado a: " + nuevoStock);
+                    verificarStockBajo(this, alarmaId); // Verifica si el stock es bajo y envía una notificación
                 } else {
                     Log.e("AlertaActivity", "Error al actualizar el stock.");
                 }
@@ -174,4 +183,62 @@ public class AlertaActivity extends AppCompatActivity {
         handler.removeCallbacks(timerRunnable); // Detener el temporizador cuando se cierre la actividad
         stopAlarmSound();
     }
+
+    private void verificarStockBajo(Context context, int alarmaId) {
+        DatabaseHelper dbHelper = new DatabaseHelper(context);
+        Alarmas alarma = dbHelper.detalleAlarma(alarmaId);
+
+        if (alarma != null) {
+            int stockActual = Integer.parseInt(alarma.getStock());
+            if (stockActual <= 5) {
+                enviarNotificacion(context, alarmaId, alarma.getNombre(), stockActual);
+            }
+        } else {
+            Log.e("AlertaActivity", "No se encontró la alarma con ID: " + alarmaId);
+        }
+    }
+
+    private void enviarNotificacion(Context context, int alarmaId, String nombreAlarma, int stockActual) {
+        Intent intent = new Intent(context, EditarStockActivity.class);
+        intent.putExtra("alarma_id", alarmaId);
+        intent.putExtra("nombre_alarma", nombreAlarma);
+
+        PendingIntent pendingIntent = PendingIntent.getActivity(
+                context,
+                alarmaId,
+                intent,
+                PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE
+        );
+
+        // Crear la notificación
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(context, "MedicAppChannel")
+                .setSmallIcon(R.drawable.baseline_notifications_24)
+                .setContentTitle("Stock bajo")
+                .setContentText("El stock de " + nombreAlarma + " es de " + stockActual + ". Actualízalo.")
+                .setPriority(NotificationCompat.PRIORITY_HIGH)
+                .setAutoCancel(true)
+                .setContentIntent(pendingIntent);
+
+        // Mostrar la notificación
+        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
+        notificationManager.notify(alarmaId, builder.build());
+    }
+
+    private void crearCanalDeNotificacion() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            CharSequence name = "MedicAppChannel";
+            String description = "Canal para notificaciones de stock bajo";
+            int importance = NotificationManager.IMPORTANCE_HIGH;
+
+            NotificationChannel channel = new NotificationChannel("MedicAppChannel", name, importance);
+            channel.setDescription(description);
+
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            if (notificationManager != null) {
+                notificationManager.createNotificationChannel(channel);
+            }
+        }
+    }
+
+
 }
