@@ -1,4 +1,4 @@
-package cl.contreras.medicapp;
+package cl.contreras.medicapp.db;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -16,15 +16,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "alarma.db";
     private static final int DATABASE_VERSION = 4;
 
-    private static final String TABLE_NAME = "alarmas";
-    private static final String COLUMN_ID = "id";
-    private static final String COLUMN_NOMBRE = "nombre";
-    private static final String COLUMN_DOSIS = "dosis";
-    private static final String COLUMN_STOCK = "stock";
-    private static final String COLUMN_FRECUENCIA = "frecuencia";
+    public static final String TABLE_NAME = "alarmas";
+    public static final String COLUMN_ID = "id";
+    public static final String COLUMN_NOMBRE = "nombre";
+    public static final String COLUMN_DOSIS = "dosis";
+    public static final String COLUMN_STOCK = "stock";
+    public static final String COLUMN_FRECUENCIA = "frecuencia";
     private static final String COLUMN_HORA_INICIAL = "hora_inicial";
 
-    private static final String TABLE_CONTACTOS = "contactos";
+    public static final String TABLE_CONTACTOS = "contactos";
     public static final String COLUMN_ID_CONTACTO = "id"; // ID para contactos
     public static final String COLUMN_NOMBRE_CONTACTO = "nombre"; // Nombre del contacto
     public static final String COLUMN_TELEFONO = "telefono"; // Teléfono del contacto
@@ -38,8 +38,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String createTable = "CREATE TABLE " + TABLE_NAME + " (" +
                 COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 COLUMN_NOMBRE + " TEXT, " +
-                COLUMN_DOSIS + " TEXT, " +
-                COLUMN_STOCK + " TEXT, " +
+                COLUMN_DOSIS + " INTEGER, " + // Cambiado a INTEGER
+                COLUMN_STOCK + " INTEGER, " + // Cambiado a INTEGER
                 COLUMN_FRECUENCIA + " INTEGER, " +
                 COLUMN_HORA_INICIAL + " TEXT)";
         db.execSQL(createTable);
@@ -62,7 +62,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
 
-    public boolean addAlarma(String nombre, String dosis, String stock, int frecuencia) {
+    public boolean addAlarma(String nombre, int dosis, int stock, int frecuencia) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(COLUMN_NOMBRE, nombre);
@@ -70,7 +70,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(COLUMN_STOCK, stock);
         values.put(COLUMN_FRECUENCIA, frecuencia);
 
-        // Registrar la hora actual como hora inicial
         String horaInicial = new SimpleDateFormat("HH:mm", Locale.getDefault()).format(new Date());
         values.put(COLUMN_HORA_INICIAL, horaInicial);
 
@@ -79,6 +78,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     public boolean addContacto(String nombre, String telefono) {
+        if (hayContacto()) {
+            return false; // Ya existe un contacto
+        }
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(COLUMN_NOMBRE_CONTACTO, nombre);
@@ -86,6 +88,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         long result = db.insert(TABLE_CONTACTOS, null, values);
         return result != -1;
+    }
+
+    private boolean hayContacto() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.query(TABLE_CONTACTOS, null, null, null, null, null, null);
+        boolean existe = (cursor != null && cursor.getCount() > 0);
+
+        if (cursor != null) {
+            cursor.close();
+        }
+        return existe;
     }
 
     public Cursor getAllAlarmas() {
@@ -110,6 +123,20 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return lastId;
     }
 
+    public String getTelefonoPorId(int id) {
+        String telefono = null;
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.query(TABLE_CONTACTOS, new String[]{COLUMN_TELEFONO}, COLUMN_ID_CONTACTO + " = ?", new String[]{String.valueOf(id)}, null, null, null);
+
+        if (cursor != null && cursor.moveToFirst()) {
+            telefono = cursor.getString(cursor.getColumnIndex(COLUMN_TELEFONO));
+            cursor.close();
+        }
+
+        return telefono;
+    }
+
+
     public boolean eliminarAlarma(int id) {
         SQLiteDatabase db = this.getWritableDatabase();
         return db.delete(TABLE_NAME, COLUMN_ID + " = ?", new String[]{String.valueOf(id)}) > 0;
@@ -119,6 +146,63 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         Log.d("DatabaseHelper", "Eliminando contacto con ID: " + id);
         return db.delete(TABLE_CONTACTOS, COLUMN_ID_CONTACTO + " = ?", new String[]{String.valueOf(id)}) > 0;
+    }
+
+    public Alarmas detalleAlarma(int id){
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        Alarmas alarma = null;
+        Cursor cursorAlarmas;
+
+        cursorAlarmas = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE id = " + id, null);
+
+        if (cursorAlarmas.moveToFirst()) {
+            alarma = new Alarmas();
+            alarma.setId(cursorAlarmas.getInt(0));
+            alarma.setNombre(cursorAlarmas.getString(1));
+            alarma.setDosis(cursorAlarmas.getString(2));
+            alarma.setStock(cursorAlarmas.getString(3));
+            alarma.setFrecuencia(cursorAlarmas.getString(4));
+
+        }
+
+        cursorAlarmas.close();
+        return alarma;
+    }
+
+    public boolean editarAlarmaDosis(int id, int dosis) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_DOSIS, dosis);
+        return db.update(TABLE_NAME, values, COLUMN_ID + " = ?", new String[]{String.valueOf(id)}) > 0;
+    }
+
+    public boolean editarAlarmaStock(int id, int stock) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_STOCK, stock);
+        return db.update(TABLE_NAME, values, COLUMN_ID + " = ?", new String[]{String.valueOf(id)}) > 0;
+    }
+
+    public boolean editarAlarmaFrecuencia(int id, int frecuencia) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_FRECUENCIA, frecuencia);
+        return db.update(TABLE_NAME, values, COLUMN_ID + " = ?", new String[]{String.valueOf(id)}) > 0;
+    }
+
+    public boolean editarNombreContacto(int id, String nombre) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_NOMBRE_CONTACTO, nombre);
+        return db.update(TABLE_CONTACTOS, values, COLUMN_ID_CONTACTO + " = ?", new String[]{String.valueOf(id)}) > 0;
+    }
+
+    public boolean editarNumeroContacto(int id, String telefono) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_TELEFONO, telefono);
+        return db.update(TABLE_CONTACTOS, values, COLUMN_ID_CONTACTO + " = ?", new String[]{String.valueOf(id)}) > 0;
     }
 
 }

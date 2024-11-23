@@ -1,18 +1,18 @@
 package cl.contreras.medicapp;
 
 import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+
+import cl.contreras.medicapp.db.DatabaseHelper;
 
 public class EliminarContactoActivity extends AppCompatActivity {
 
@@ -48,6 +48,7 @@ public class EliminarContactoActivity extends AppCompatActivity {
         // Volver al Menu Contacto
         botonVolverEliminarContacto.setOnClickListener(v -> {
             startActivity(new Intent(EliminarContactoActivity.this, MenuContactoActivity.class));
+            finish();
         });
 
         btneliminarcontacto.setOnClickListener(v -> {
@@ -69,11 +70,10 @@ public class EliminarContactoActivity extends AppCompatActivity {
         } else {
             Toast.makeText(this, "Error al eliminar el contacto", Toast.LENGTH_SHORT).show();
         }
-
         Intent intent = new Intent(EliminarContactoActivity.this, MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(intent);
-        finish();  // Cierra esta actividad
+        startActivity(intent);// Cierra esta actividad
+        finish();
     }
 
 
@@ -81,8 +81,8 @@ public class EliminarContactoActivity extends AppCompatActivity {
         Cursor cursor = dbHelper.getAllContactos();
         if (cursor != null && cursor.moveToFirst()) {
             // Obtener el nombre y teléfono del primer contacto (el más reciente)
-            String nombre = cursor.getString(cursor.getColumnIndex(DatabaseHelper.COLUMN_NOMBRE_CONTACTO));
-            String telefono = cursor.getString(cursor.getColumnIndex(DatabaseHelper.COLUMN_TELEFONO));
+            String nombre = cursor.getString(cursor.getColumnIndexOrThrow(DatabaseHelper.COLUMN_NOMBRE_CONTACTO));
+            String telefono = cursor.getString(cursor.getColumnIndexOrThrow(DatabaseHelper.COLUMN_TELEFONO));
             nombrecontactotextview.setText(nombre);
             telefonocontactotextview.setText(telefono);
             cursor.close();

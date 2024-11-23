@@ -21,7 +21,6 @@
                 android:text="!!Hola usuario \nEs hora de su medicamento¡¡"
                 android:textAlignment="center"
                 android:textSize="28sp"
-
                 android:textColor="@color/black"
                 android:layout_centerInParent="true"/>
         </RelativeLayout>
@@ -58,7 +57,7 @@
                     android:id="@+id/textViewAlarma"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="!Alarma activada¡"
+                    android:text="Nombre medicamento"
                     android:textSize="30sp"
                     android:textColor="@color/black"
                     android:layout_centerInParent="true"/>
@@ -121,7 +120,8 @@
                     android:layout_height="70dp"
                     android:layout_centerInParent="true"
                     android:backgroundTint="@color/rojo"
-                    android:text="Detener Alarma"
+                    android:textAlignment="center"
+                    android:text="Tomar medicamento y Detener Alarma"
                     android:textColor="@color/white"
                     android:textSize="20sp" />
             </RelativeLayout>

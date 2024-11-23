@@ -8,9 +8,12 @@ import android.widget.Button;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 
+import cl.contreras.medicapp.db.DatabaseHelper;
+
 public class MenuEditarAlarmaActivity extends AppCompatActivity {
 
     private int alarmaId; // Variable para almacenar el ID de la alarma
+    DatabaseHelper dbHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,8 +21,10 @@ public class MenuEditarAlarmaActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_menu_editar_alarma);
 
+        dbHelper = new DatabaseHelper(this);
+
         // Obtener el ID de la alarma que se está editando
-        alarmaId = getIntent().getIntExtra("alarmaId", -1);
+        alarmaId = getIntent().getIntExtra("alarma_id", -1);
 
         Button btnEditarDosis = findViewById(R.id.btnEditarDosis);
         Button btnEditarFrecuencia = findViewById(R.id.btnEditarFrecuencia);
@@ -29,34 +34,41 @@ public class MenuEditarAlarmaActivity extends AppCompatActivity {
         btnEditarDosis.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MenuEditarAlarmaActivity.this, EditarDosisActivity.class);
-                intent.putExtra("alarmaId", alarmaId);
-                startActivity(intent);
+                if (alarmaId != -1) {  // Verifica que el ID de la alarma sea válido
+                    Intent intent = new Intent(MenuEditarAlarmaActivity.this, EditarDosisActivity.class);
+                    intent.putExtra("alarma_id", alarmaId);
+                    startActivity(intent);
+                }
             }
         });
 
         btnEditarFrecuencia.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MenuEditarAlarmaActivity.this, EditarFrecuenciaActivity.class);
-                intent.putExtra("alarmId", alarmaId);
-                startActivity(intent);
+                if (alarmaId != -1) {  // Verifica que el ID de la alarma sea válido
+                    Intent intent = new Intent(MenuEditarAlarmaActivity.this, EditarFrecuenciaActivity.class);
+                    intent.putExtra("alarma_id", alarmaId);
+                    startActivity(intent);
+                }
             }
         });
 
         btnEditarStock.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MenuEditarAlarmaActivity.this, EditarStockActivity.class);
-                intent.putExtra("alarmaId", alarmaId);
-                startActivity(intent);
+                if (alarmaId != -1) {  // Verifica que el ID de la alarma sea válido
+                    Intent intent = new Intent(MenuEditarAlarmaActivity.this, EditarStockActivity.class);
+                    intent.putExtra("alarma_id", alarmaId);
+                    startActivity(intent);
+                }
             }
         });
 
         btnVolverEditarAlarma.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MenuEditarAlarmaActivity.this, OpcionesAlarmaActivity.class));
+                // Cancelar y regresar a la actividad anterior
+                finish();
             }
         });
     }

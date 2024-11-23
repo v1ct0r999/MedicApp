@@ -28,7 +28,8 @@
                 android:textSize="40dp"
                 android:textStyle="bold"
                 android:textAlignment="center"
-                android:layout_centerInParent="true">
+                android:layout_centerInParent="true"
+                android:textColor="@color/black">
             </TextView>
 
         </RelativeLayout>
@@ -74,12 +75,14 @@
                 android:layout_height="match_parent">
 
                 <TextView
+                    android:id="@+id/NombreContactoActual"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Nombre Apellido"
                     android:textSize="25dp"
                     android:textAlignment="center"
-                    android:layout_centerVertical="true">
+                    android:layout_centerVertical="true"
+                    android:textColor="@color/black">
                 </TextView>
 
             </RelativeLayout>
@@ -113,7 +116,8 @@
                     android:textStyle="italic"
                     android:textSize="20dp"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginTop="50dp">
+                    android:layout_marginTop="50dp"
+                    android:textColor="@color/black">
                 </TextView>
 
             </RelativeLayout>
@@ -169,7 +173,9 @@
                     android:textStyle="bold"
                     android:textSize="30dp"
                     android:height="75dp"
-                    android:layout_centerInParent="true" />
+                    android:layout_centerInParent="true"
+                    android:backgroundTint="@color/cyan"
+                    android:textColor="@color/black"/>
 
             </RelativeLayout>
 
@@ -193,7 +199,9 @@
                     android:textStyle="bold"
                     android:textSize="30dp"
                     android:height="75dp"
-                    android:layout_centerInParent="true" />
+                    android:layout_centerInParent="true"
+                    android:textColor="@color/white"
+                    android:backgroundTint="@color/morado"/>
 
             </RelativeLayout>
 

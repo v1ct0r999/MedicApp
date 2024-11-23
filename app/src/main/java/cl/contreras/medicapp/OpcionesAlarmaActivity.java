@@ -31,7 +31,7 @@ public class OpcionesAlarmaActivity extends AppCompatActivity {
 
         // Obtener el ID y nombre de la alarma desde el Intent
         alarmaId = getIntent().getIntExtra("alarma_id", -1); // Recibir el ID de la alarma
-        String alarmaNombre = getIntent().getStringExtra("alarma_nombre"); // Nombre opcional
+        String alarmaNombre = getIntent().getStringExtra("alarma_nombre");
 
         // Referencias a los elementos de la vista
         alarmaNombreTextView = findViewById(R.id.alarmaNombreTextView);
@@ -40,13 +40,11 @@ public class OpcionesAlarmaActivity extends AppCompatActivity {
         btnEliminarAlarma = findViewById(R.id.btnEliminarAlarma);
         BotonAtrasAlarma = findViewById(R.id.BotonAtrasAlarma);
 
-        // Mostrar el nombre de la alarma en el TextView si está disponible
         if (alarmaNombre != null) {
             alarmaNombreTextView.setText(alarmaNombre);
         }
 
         // Lógica para cada botón
-
         // Ir a la pantalla para ver detalles
         btnDetallesAlarma.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,7 +60,11 @@ public class OpcionesAlarmaActivity extends AppCompatActivity {
         btnEditarAlarma.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(OpcionesAlarmaActivity.this, MenuEditarAlarmaActivity.class));
+                if (alarmaId != -1) {  // Verifica que el ID de la alarma sea válido
+                    Intent intent = new Intent(OpcionesAlarmaActivity.this, MenuEditarAlarmaActivity.class);
+                    intent.putExtra("alarma_id", alarmaId);
+                    startActivity(intent);
+                }
             }
         });
 
@@ -85,6 +87,7 @@ public class OpcionesAlarmaActivity extends AppCompatActivity {
         BotonAtrasAlarma.setOnClickListener(v -> {
             Intent intent = new Intent(OpcionesAlarmaActivity.this, MainActivity.class);
             startActivity(intent);
+            finish();
         });
     }
 
@@ -110,12 +113,12 @@ public class OpcionesAlarmaActivity extends AppCompatActivity {
     private void cancelarAlarma(int alarmaId) {
         AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
         Intent intent = new Intent(OpcionesAlarmaActivity.this, ReminderBroadcastReceiver.class);
-        intent.putExtra("alarma_id", alarmaId); // Se envía el ID de la alarma
+        intent.putExtra("nombre_alarma", ""); // Agrega el mismo extra que en el scheduleReminder si es necesario
 
-        // Crear el PendingIntent con el mismo requestCode que se utilizó para programar la alarma
+        // Usar alarmaId como requestCode
         PendingIntent pendingIntent = PendingIntent.getBroadcast(
                 this,
-                0,
+                alarmaId, // Asegúrate de usar alarmaId aquí también
                 intent,
                 PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE
         );
@@ -125,4 +128,5 @@ public class OpcionesAlarmaActivity extends AppCompatActivity {
             alarmManager.cancel(pendingIntent);
         }
     }
+
 }

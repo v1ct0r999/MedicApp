@@ -7,19 +7,17 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 import cl.contreras.medicapp.db.Alarmas;
 import cl.contreras.medicapp.db.DatabaseHelper;
 
 public class DetallesAlarmasActivity extends AppCompatActivity {
 
-    EditText Nombre, Dosis, Stock, Frecuencia;
+    TextView Nombre, Dosis, Stock, Frecuencia;
     Button Volver;
 
     Alarmas alarma;
@@ -71,16 +69,13 @@ public class DetallesAlarmasActivity extends AppCompatActivity {
             Dosis.setText(alarma.getDosis());
             Stock.setText(alarma.getStock());
             Frecuencia.setText(alarma.getFrecuencia());
-            Nombre.setInputType(InputType.TYPE_NULL);
-            Dosis.setInputType(InputType.TYPE_NULL);
-            Stock.setInputType(InputType.TYPE_NULL);
-            Frecuencia.setInputType(InputType.TYPE_NULL);
         }
 
         Volver.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(DetallesAlarmasActivity.this, OpcionesAlarmaActivity.class));
+                // Cancelar y regresar a la actividad anterior
+                finish();
             }
         });
 

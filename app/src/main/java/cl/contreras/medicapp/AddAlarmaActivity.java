@@ -33,30 +33,35 @@ public class AddAlarmaActivity extends AppCompatActivity {
 
         btnSave.setOnClickListener(v -> {
             String nombre = editTextNombre.getText().toString();
-            String dosis = editTextDosis.getText().toString();
-            String stock = editTextStock.getText().toString();
+            String dosisText = editTextDosis.getText().toString();
+            String stockText = editTextStock.getText().toString();
             String frecuenciaText = editTextFrecuencia.getText().toString();
 
-            if (nombre.isEmpty() || dosis.isEmpty() || stock.isEmpty() || frecuenciaText.isEmpty()) {
+            if (nombre.isEmpty() || dosisText.isEmpty() || stockText.isEmpty() || frecuenciaText.isEmpty()) {
                 Toast.makeText(AddAlarmaActivity.this, "Por favor complete todos los campos", Toast.LENGTH_SHORT).show();
             } else {
+                int dosis = Integer.parseInt(dosisText);
+                int stock = Integer.parseInt(stockText);
                 int frecuencia = Integer.parseInt(frecuenciaText);
+
                 boolean isInserted = dbHelper.addAlarma(nombre, dosis, stock, frecuencia);
                 if (isInserted) {
-                    // Cambiado: Obtener el ID de la última alarma insertada
-                    int alarmaId = dbHelper.getLastInsertedId(); // Implementa este método en DatabaseHelper
-                    scheduleReminder(nombre, frecuencia, alarmaId); // Usar alarmaId aquí
+                    int alarmaId = dbHelper.getLastInsertedId();
+                    scheduleReminder(nombre, frecuencia, alarmaId);
                     Toast.makeText(AddAlarmaActivity.this, "Alarma guardada", Toast.LENGTH_SHORT).show();
-                    finish(); // Volver a la actividad principal
+                    Intent intent = new Intent(AddAlarmaActivity.this, MainActivity.class);
+                    startActivity(intent);
+                    finish();
                 } else {
                     Toast.makeText(AddAlarmaActivity.this, "Error al guardar", Toast.LENGTH_SHORT).show();
                 }
             }
-
         });
+
         btnCancel.setOnClickListener(v -> {
             Intent intent = new Intent(AddAlarmaActivity.this, MainActivity.class);
             startActivity(intent);
+            finish();
         });
     }
 
@@ -65,15 +70,15 @@ public class AddAlarmaActivity extends AppCompatActivity {
         AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
         Intent intent = new Intent(AddAlarmaActivity.this, ReminderBroadcastReceiver.class);
         intent.putExtra("nombre_alarma", nombre);
+        intent.putExtra("alarma_id", alarmaId);
 
-        // Usar alarmaId como requestCode
         PendingIntent pendingIntent = PendingIntent.getBroadcast(
                 this,
-                0,
+                alarmaId, // Cambiado para usar el ID único de la alarma
                 intent,
                 PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE
-
         );
+
 
         // Programar la alarma para que se active cada X minutos
         long triggerTime = Calendar.getInstance().getTimeInMillis() + frecuencia * 60000; // 60000 milisegundos en un minuto
@@ -81,4 +86,5 @@ public class AddAlarmaActivity extends AppCompatActivity {
         // Configurar una alarma repetitiva
         alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, triggerTime, frecuencia * 60000, pendingIntent);
     }
+
 }

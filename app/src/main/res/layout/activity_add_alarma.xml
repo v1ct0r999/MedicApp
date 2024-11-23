@@ -142,7 +142,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Dosis recetada"
-                    android:inputType=""
+                    android:inputType="number"
                     android:textColor="@color/black"/>
 
             </RelativeLayout>
@@ -204,7 +204,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Cantidad total (stock)"
-                        android:inputType=""
+                        android:inputType="number"
                         android:textColor="@color/black"/>
 
 
@@ -262,7 +262,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Frecuencia (horas)"
-                    android:inputType="date"
+                    android:inputType="number"
                     android:textColor="@color/black"/>
 
             </RelativeLayout>
@@ -293,10 +293,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Guardar"
-                    android:textColor="@color/white"
                     android:textStyle="bold"
                     android:textSize="30dp"
-                    android:layout_centerInParent="true" />
+                    android:layout_centerInParent="true"
+                    android:textColor="@color/black"
+                    android:backgroundTint="@color/cyan"/>
 
             </RelativeLayout>
 
@@ -317,10 +318,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Cancelar"
-                    android:textColor="@color/white"
                     android:textStyle="bold"
                     android:textSize="30dp"
-                    android:layout_centerInParent="true" />
+                    android:layout_centerInParent="true"
+                    android:textColor="@color/white"
+                    android:backgroundTint="@color/morado"/>
 
             </RelativeLayout>
 

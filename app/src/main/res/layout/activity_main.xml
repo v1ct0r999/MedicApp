@@ -13,21 +13,54 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="8">
-        <RelativeLayout
+        android:layout_weight="8"
+        android:orientation="horizontal">
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <TextView
-                android:id="@+id/Saludo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Buenos días"
-                android:textColor="@color/black"
-                android:textSize="30dp">
-            </TextView>
-        </RelativeLayout>
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_weight="1">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <TextView
+                    android:id="@+id/Saludo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Buenos días"
+                    android:textColor="@color/black"
+                    android:textSize="22dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerInParent="true">
+                </TextView>
+            </RelativeLayout>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="2">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <Button
+                    android:id="@+id/btncerrarsesion"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:text="Cerrar Sesion"
+                    android:textSize="14dp"
+                    android:textColor="@color/black"
+                    android:layout_alignParentRight="true"
+                    android:backgroundTint="@color/nose">
+
+                </Button>
+
+            </RelativeLayout>
+        </LinearLayout>
+
 
     </LinearLayout>
+
 
 
 
@@ -49,7 +82,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1">
+                android:layout_weight="2">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -79,70 +112,19 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Ver \nCalendario"
+                        android:text="Ver Calendario"
                         android:textColor="@color/black"
                         android:textAlignment="center"
-                        android:layout_centerInParent="true">
-                    </TextView>
-                </RelativeLayout>
-
-            </LinearLayout>
-
-        </LinearLayout>
-        <!-- Linear agregar contacto -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:layout_weight="1">
-
-            <!-- linear imagen de agregar contacto -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1">
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <ImageButton
-                        android:id="@+id/opcionesnotificaciones"
-                        android:layout_width="185px"
-                        android:layout_height="185px"
                         android:layout_centerInParent="true"
-                        android:background="@drawable/campana"
-                        />
-                </RelativeLayout>
-
-            </LinearLayout>
-
-            <!-- linear texto del boton agregar contacto -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="3">
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Ajuste \nnotificaciones"
-                        android:textColor="@color/black"
-                        android:textAlignment="center"
-                        android:layout_alignParentBottom="true"
-                        android:layout_centerInParent="true">
+                        android:textSize="16dp">
                     </TextView>
-
                 </RelativeLayout>
 
             </LinearLayout>
 
         </LinearLayout>
-        <!-- Linear personalizar notificaciones -->
+
+        <!-- Linear agregar contacto -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -154,7 +136,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1">
+                android:layout_weight="2">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -185,11 +167,11 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Contacto \nEmergencia"
+                        android:text="Contacto S.O.S"
                         android:textColor="@color/black"
                         android:textAlignment="center"
-                        android:layout_alignParentBottom="true"
-                        android:layout_centerInParent="true">
+                        android:layout_centerInParent="true"
+                        android:textSize="16dp">
                     </TextView>
 
                 </RelativeLayout>
@@ -199,19 +181,75 @@
         </LinearLayout>
     </LinearLayout>
 
-
-
-    <!-- Linear lista -->
-    <ScrollView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="3">
-        <LinearLayout
-            android:id="@+id/alarmaLayout"
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" />
-    </ScrollView>
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:id="@+id/tvNoAlarmas"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:visibility="gone">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+                        <ImageView
+                            android:layout_width="200dp"
+                            android:layout_height="200dp"
+                            android:layout_centerInParent="true"
+                            android:src="@drawable/exclamacion">
+                        </ImageView>
+                    </RelativeLayout>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2">
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="No existen registros de medicamentos"
+                            android:textSize="25dp"
+                            android:textColor="#FF4444"
+                            android:layout_marginTop="20dp"
+                            android:layout_centerInParent="true"
+                            android:textStyle="bold"
+                            android:textAlignment="center"/>
+                    </RelativeLayout>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2">
+                </LinearLayout>
+            </LinearLayout>
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:id="@+id/alarmaLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical" />
+            </ScrollView>
+        </FrameLayout>
+    </LinearLayout>
+
+
+
 
     <!-- Linear opciones abajo -->
     <LinearLayout
@@ -232,7 +270,7 @@
                     android:id="@+id/btnAddAlarma"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="30dp"
+                    android:textSize="30sp"
                     android:textColor="@color/black"
                     android:text="Añadir Alarma"
                     android:layout_centerInParent="true"

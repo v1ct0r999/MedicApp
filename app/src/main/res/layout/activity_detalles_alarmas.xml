@@ -60,7 +60,7 @@
                     android:text="Nombre Medicamento"
                     android:textColor="@color/black"
                     android:textStyle="italic"
-                    android:textSize="20dp"
+                    android:textSize="25dp"
                     android:layout_centerInParent="true">
                 </TextView>
 
@@ -78,12 +78,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <EditText
+                <TextView
                     android:id="@+id/detalleNombre"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:textColor="@color/black"/>
+                    android:layout_centerVertical="true"
+                    android:textSize="22dp"
+                    android:textColor="@color/black"
+                    android:text="nombre"/>
 
             </RelativeLayout>
 
@@ -115,7 +117,7 @@
                     android:text="Dosis del Medicamento"
                     android:textColor="@color/black"
                     android:textStyle="italic"
-                    android:textSize="20dp"
+                    android:textSize="25dp"
                     android:layout_centerInParent="true">
                 </TextView>
 
@@ -133,12 +135,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <EditText
+                <TextView
                     android:id="@+id/detalleDosis"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType=""
-                    android:textColor="@color/black"/>
+                    android:layout_centerVertical="true"
+                    android:textSize="20dp"
+                    android:textColor="@color/black"
+                    android:text="dosis"/>
 
             </RelativeLayout>
 
@@ -176,7 +180,7 @@
                         android:text="Stock del medicamento"
                         android:textColor="@color/black"
                         android:textStyle="italic"
-                        android:textSize="20dp"
+                        android:textSize="25dp"
                         android:layout_centerInParent="true">
                     </TextView>
 
@@ -194,12 +198,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
-                    <EditText
+                    <TextView
                         android:id="@+id/detalleStock"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType=""
-                        android:textColor="@color/black"/>
+                        android:layout_centerVertical="true"
+                        android:textSize="20dp"
+                        android:textColor="@color/black"
+                        android:text="stock"/>
 
 
                 </RelativeLayout>
@@ -233,7 +239,7 @@
                     android:text="Frecuencia del Medicamento"
                     android:textColor="@color/black"
                     android:textStyle="italic"
-                    android:textSize="20dp"
+                    android:textSize="25dp"
                     android:layout_centerInParent="true">
                 </TextView>
 
@@ -251,11 +257,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <EditText
+                <TextView
                     android:id="@+id/detalleFrecuencia"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="date"
+                    android:layout_centerVertical="true"
+                    android:text="frecuencia"
+                    android:textSize="20dp"
                     android:textColor="@color/black"/>
 
             </RelativeLayout>
@@ -286,10 +294,11 @@
                     android:layout_height="wrap_content"
                     android:height="70dp"
                     android:text="Volver"
-                    android:textColor="@color/white"
                     android:textStyle="bold"
                     android:textSize="30dp"
-                    android:layout_centerInParent="true" />
+                    android:layout_centerInParent="true"
+                    android:textColor="@color/white"
+                    android:backgroundTint="@color/morado"/>
 
             </RelativeLayout>
 

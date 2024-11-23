@@ -28,7 +28,8 @@
                 android:textSize="40dp"
                 android:textStyle="bold"
                 android:textAlignment="center"
-                android:layout_centerInParent="true">
+                android:layout_centerInParent="true"
+                android:textColor="@color/black">
             </TextView>
 
         </RelativeLayout>
@@ -85,9 +86,11 @@
                         android:id="@+id/nombrecontacto"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:text="nombre"
                         android:textSize="25dp"
                         android:textAlignment="center"
-                        android:layout_centerVertical="true">
+                        android:layout_centerVertical="true"
+                        android:textColor="@color/black">
                     </TextView>
 
                 </RelativeLayout>
@@ -140,8 +143,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="25dp"
+                        android:text="telefono"
                         android:textAlignment="center"
-                        android:layout_centerVertical="true">
+                        android:layout_centerVertical="true"
+                        android:textColor="@color/black">
                     </TextView>
 
                 </RelativeLayout>
@@ -205,9 +210,10 @@
                         android:layout_height="wrap_content"
                         android:height="75dp"
                         android:text="Eliminar"
-                        android:textStyle="bold"
                         android:textSize="30dp"
-                        android:layout_centerHorizontal="true" />
+                        android:textStyle="bold"
+                        android:layout_centerHorizontal="true"
+                        android:backgroundTint="@color/rojo"/>
 
                 </RelativeLayout>
 
@@ -262,7 +268,9 @@
                         android:text="Volver"
                         android:textStyle="bold"
                         android:textSize="30dp"
-                        android:layout_centerHorizontal="true" />
+                        android:layout_centerHorizontal="true"
+                        android:textColor="@color/white"
+                        android:backgroundTint="@color/morado"/>
 
                 </RelativeLayout>
 
