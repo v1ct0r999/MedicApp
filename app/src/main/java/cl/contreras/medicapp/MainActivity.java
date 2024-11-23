@@ -41,12 +41,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            if (ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.POST_NOTIFICATIONS}, 1);
-            }
-        }
-
         TextView Saludo = findViewById(R.id.Saludo);
 
         sharedPreferences = getSharedPreferences("UserPrefs", Context.MODE_PRIVATE);
@@ -89,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
         ImageButton botonContacto = (ImageButton) findViewById(R.id.agregarcontacto);
         ImageButton botonemergerncia = (ImageButton) findViewById(R.id.botonemergencia);
 
-        Button btnCerrarSesion = (Button) findViewById(R.id.btncerrarsesion);
+        ImageButton btnCerrarSesion = (ImageButton) findViewById(R.id.btncerrarsesion);
 
         btnCerrarSesion.setOnClickListener(v -> {
             // Eliminar el nombre de usuario de SharedPreferences

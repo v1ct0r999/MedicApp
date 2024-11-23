@@ -29,7 +29,7 @@
                     android:layout_height="wrap_content"
                     android:text="Buenos días"
                     android:textColor="@color/black"
-                    android:textSize="22dp"
+                    android:textSize="20sp"
                     android:layout_alignParentLeft="true"
                     android:layout_centerInParent="true">
                 </TextView>
@@ -43,17 +43,15 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
-                <Button
+                <ImageButton
                     android:id="@+id/btncerrarsesion"
-                    android:layout_width="100dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Cerrar Sesion"
-                    android:textSize="14dp"
-                    android:textColor="@color/black"
+                    android:src="@drawable/salir"
                     android:layout_alignParentRight="true"
-                    android:backgroundTint="@color/nose">
+                    android:outlineAmbientShadowColor="@color/white">
 
-                </Button>
+                </ImageButton>
 
             </RelativeLayout>
         </LinearLayout>
@@ -268,9 +266,9 @@
                 android:layout_height="match_parent">
                 <Button
                     android:id="@+id/btnAddAlarma"
-                    android:layout_width="wrap_content"
+                    android:layout_width="250dp"
                     android:layout_height="wrap_content"
-                    android:textSize="30sp"
+                    android:textSize="25sp"
                     android:textColor="@color/black"
                     android:text="Añadir Alarma"
                     android:layout_centerInParent="true"
@@ -292,7 +290,7 @@
                     android:layout_width="185px"
                     android:layout_height="185px"
                     android:layout_centerInParent="true"
-                    android:background="@drawable/alarma"
+                    android:background="@drawable/emergencia"
                     />
 
             </RelativeLayout>

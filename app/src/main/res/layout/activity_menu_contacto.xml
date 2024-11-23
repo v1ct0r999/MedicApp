@@ -240,7 +240,6 @@
                     android:layout_height="80dp"
                     android:layout_marginBottom="16dp"
                     android:text="Volver"
-                    android:textColor="@android:color/white"
                     android:textSize="25dp"
                     android:textStyle="bold"
                     android:layout_centerInParent="true"
