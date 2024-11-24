@@ -33,7 +33,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".DetallesAlarmasActivity"
+            android:name=".CalendarioActivity"
             android:exported="false" />
         <activity
             android:name=".AddAlarmaActivity"

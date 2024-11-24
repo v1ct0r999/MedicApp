@@ -9,7 +9,13 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 import android.view.View;
@@ -48,10 +54,18 @@ public class CalendarioActivity extends AppCompatActivity {
     private void mostrarAlarmas() {
         Cursor cursor = dbHelper.getAllAlarmas();
         StringBuilder calendarioTexto = new StringBuilder();
-        SimpleDateFormat dayFormat = new SimpleDateFormat("EEEE", Locale.getDefault());  // Formato para el día de la semana
+
+        // Crear un SimpleDateFormat con la localización en español
+        SimpleDateFormat dayFormat = new SimpleDateFormat("EEEE", new Locale("es", "ES"));
+
+        // Lista para almacenar todas las alarmas de todos los días
+        Map<String, List<AlarmaInfo>> alarmasPorDia = new LinkedHashMap<>();
+
+        // Los días de la semana en orden
+        String[] diasSemana = {"lunes", "martes", "miércoles", "jueves", "viernes", "sábado", "domingo"};
 
         if (cursor.getCount() == 0) {
-            // Si no hay registros, muestra el mensaje de "No existen registros de medicamentos"
+            // Si no hay registros, muestra el mensaje de "No existen registros"
             tvNoAlarmas.setVisibility(View.VISIBLE);
             tvCalendario.setVisibility(View.GONE);
         } else {
@@ -59,51 +73,83 @@ public class CalendarioActivity extends AppCompatActivity {
             tvNoAlarmas.setVisibility(View.GONE);
             tvCalendario.setVisibility(View.VISIBLE);
 
+            // Agrupar las alarmas por día
             while (cursor.moveToNext()) {
                 String nombre = cursor.getString(cursor.getColumnIndexOrThrow("nombre"));
                 int frecuencia = cursor.getInt(cursor.getColumnIndexOrThrow("frecuencia"));
                 String horaInicial = cursor.getString(cursor.getColumnIndexOrThrow("hora_inicial"));
 
-                // Encabezado del medicamento
-                calendarioTexto.append("Medicamento: ").append(nombre).append("\n");
-                calendarioTexto.append("Próximas alarmas:\n");
-
                 // Calcula las alarmas próximas agrupadas por día
-                ArrayList<AlarmaDia> alarmasPorDia = calcularProximasAlarmasAgrupadasPorDia(horaInicial, frecuencia);
+                ArrayList<AlarmaInfo> alarmasPorDiaActual = calcularProximasAlarmasAgrupadasPorDia(horaInicial, frecuencia);
 
-                String ultimoDia = "";
-                for (AlarmaDia alarmaDia : alarmasPorDia) {
-                    if (!ultimoDia.equals(alarmaDia.diaSemana)) {
-                        ultimoDia = alarmaDia.diaSemana;
-                        calendarioTexto.append("Día ").append(alarmaDia.diaSemana).append(":\n");
+                // Agregar el nombre de la alarma a cada alarma y agrupar por día
+                for (AlarmaInfo alarma : alarmasPorDiaActual) {
+                    alarma.nombre = nombre; // Asignar el nombre del medicamento
+
+                    // Obtener el día de la semana en formato completo (lunes, martes, etc.)
+                    Calendar calendar = Calendar.getInstance();
+                    calendar.setTimeInMillis(alarma.timestamp);
+                    String diaSemana = new SimpleDateFormat("EEEE", new Locale("es", "ES")).format(calendar.getTime()).toLowerCase();
+
+                    // Agrupar las alarmas por día de la semana
+                    if (!alarmasPorDia.containsKey(diaSemana)) {
+                        alarmasPorDia.put(diaSemana, new ArrayList<>());
                     }
-                    calendarioTexto.append("   ").append(alarmaDia.hora).append("\n");
+                    alarmasPorDia.get(diaSemana).add(alarma); // Añadir alarma a la lista del día correspondiente
                 }
-                calendarioTexto.append("\n");
             }
 
+            // Ordenar las alarmas por día (lunes a domingo)
+            for (String dia : diasSemana) {
+                if (alarmasPorDia.containsKey(dia)) {
+                    List<AlarmaInfo> alarmasDelDia = alarmasPorDia.get(dia);
+
+                    // Ordenar las alarmas dentro de cada día por timestamp (hora)
+                    Collections.sort(alarmasDelDia, new Comparator<AlarmaInfo>() {
+                        @Override
+                        public int compare(AlarmaInfo a1, AlarmaInfo a2) {
+                            return Long.compare(a1.timestamp, a2.timestamp); // Ordenar por timestamp
+                        }
+                    });
+
+                    // Agregar las alarmas del día al StringBuilder
+                    calendarioTexto.append(dia.substring(0, 1).toUpperCase() + dia.substring(1) + ":\n"); // Capitalizar el primer letra del día
+                    for (AlarmaInfo alarma : alarmasDelDia) {
+                        calendarioTexto.append("   " + alarma.nombre + " - " + alarma.hora + "\n");
+                    }
+                    calendarioTexto.append("\n");
+                }
+            }
+
+            // Mostrar el calendario con todas las alarmas ordenadas
             tvCalendario.setText(calendarioTexto.toString());
         }
 
         cursor.close();
     }
 
-    // Clase auxiliar para manejar alarmas por día y hora
-    private class AlarmaDia {
-        String diaSemana;
-        String hora;
 
-        AlarmaDia(String diaSemana, String hora) {
-            this.diaSemana = diaSemana;
+
+
+    // Clase auxiliar para manejar alarmas por día y hora
+    private class AlarmaInfo {
+        String nombre;
+        String hora;
+        long timestamp;  // Usaremos el timestamp (milisegundos desde el 1 de enero de 1970) para ordenar
+
+        AlarmaInfo(String nombre, String hora, long timestamp) {
+            this.nombre = nombre;
             this.hora = hora;
+            this.timestamp = timestamp;
         }
     }
 
-    private ArrayList<AlarmaDia> calcularProximasAlarmasAgrupadasPorDia(String horaInicial, int frecuencia) {
-        ArrayList<AlarmaDia> proximasAlarmas = new ArrayList<>();
+
+    private ArrayList<AlarmaInfo> calcularProximasAlarmasAgrupadasPorDia(String horaInicial, int frecuencia) {
+        ArrayList<AlarmaInfo> proximasAlarmas = new ArrayList<>();
         SimpleDateFormat sdfHora = new SimpleDateFormat("HH:mm", Locale.getDefault());
-        SimpleDateFormat sdfDia = new SimpleDateFormat("EEEE", Locale.getDefault());
-        Calendar calendarioActual = Calendar.getInstance(); // Fecha y hora actuales
+        SimpleDateFormat sdfDia = new SimpleDateFormat("EEEE", new Locale("es", "ES"));
+        Calendar calendarioActual = Calendar.getInstance();
 
         try {
             // Parsear la hora inicial con la fecha actual
@@ -118,11 +164,9 @@ public class CalendarioActivity extends AppCompatActivity {
             for (int i = 0; i < 7 * (24 / frecuencia); i++) { // calcula 7 días de alarmas
                 long proximaHora = calendarioActual.getTimeInMillis() + TimeUnit.HOURS.toMillis(i * frecuencia);
                 Date proximaFecha = new Date(proximaHora);
+                String hora = sdfHora.format(proximaFecha);
 
-                String diaSemana = sdfDia.format(proximaFecha);  // Día de la semana
-                String hora = sdfHora.format(proximaFecha);      // Hora de la alarma
-
-                proximasAlarmas.add(new AlarmaDia(diaSemana, hora));
+                proximasAlarmas.add(new AlarmaInfo("Alarma", hora, proximaHora)); // "Alarma" es el nombre temporal, se modificará más adelante
             }
 
         } catch (Exception e) {
