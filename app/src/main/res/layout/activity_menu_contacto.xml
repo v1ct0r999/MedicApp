@@ -77,7 +77,7 @@
                     android:layout_height="80dp"
                     android:layout_marginBottom="16dp"
                     android:backgroundTint="@color/cyan"
-                    android:text="Nuevo contacto emergencia"
+                    android:text="Nuevo contacto"
                     android:textColor="@android:color/black"
                     android:textSize="25dp"
                     android:textStyle="bold"

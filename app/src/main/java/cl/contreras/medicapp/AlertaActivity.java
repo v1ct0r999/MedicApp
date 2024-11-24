@@ -125,7 +125,7 @@ public class AlertaActivity extends AppCompatActivity {
 
         AlarmManager alarmManager = (AlarmManager) getApplicationContext().getSystemService(Context.ALARM_SERVICE);
         long triggerAtMillis = System.currentTimeMillis() + SNOOZE_TIME;
-
+        
         // Solo verifica el permiso si estamos en Android 12 (API 31) o superior
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
             // Utilizar setExactAndAllowWhileIdle para mayor compatibilidad
