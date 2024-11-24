@@ -213,7 +213,8 @@
                         android:textSize="30dp"
                         android:textStyle="bold"
                         android:layout_centerHorizontal="true"
-                        android:backgroundTint="@color/rojo"/>
+                        android:backgroundTint="@color/rojo"
+                        android:textColor="@color/white"/>
 
                 </RelativeLayout>
 
