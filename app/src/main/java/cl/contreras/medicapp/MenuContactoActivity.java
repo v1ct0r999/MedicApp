@@ -4,11 +4,16 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 
+import cl.contreras.medicapp.db.DatabaseHelper;
+
 public class MenuContactoActivity extends AppCompatActivity {
+
+    private DatabaseHelper dbHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,6 +25,7 @@ public class MenuContactoActivity extends AppCompatActivity {
         Button botonEliminarContacto = (Button) findViewById(R.id.btnEliminar);
         Button botonVolverContacto = (Button) findViewById(R.id.btnVolverContacto);
         final int contactoId = 1;
+        dbHelper = new DatabaseHelper(this);
 
         // Conectar el layout menucontacto con agregarcontacto
         botonNuevoContacto.setOnClickListener(new View.OnClickListener() {
@@ -30,16 +36,26 @@ public class MenuContactoActivity extends AppCompatActivity {
         });
 
         botonEditarContacto.setOnClickListener(v -> {
-            Intent intent = new Intent(MenuContactoActivity.this, MenuEditarContactoActivity.class);
-            intent.putExtra("contactos_id", contactoId);
-            startActivity(intent);
+            if (dbHelper.hayContacto()){
+                Intent intent = new Intent(MenuContactoActivity.this, MenuEditarContactoActivity.class);
+                intent.putExtra("contactos_id", contactoId);
+                startActivity(intent);
+            } else {
+                Toast.makeText(this, "No hay contactos agregados!", Toast.LENGTH_SHORT).show();
+            }
+
         });
 
         // Conectar el layout menucontacto con eliminarcontacto
         botonEliminarContacto.setOnClickListener(v -> {
-            Intent intent = new Intent(MenuContactoActivity.this, EliminarContactoActivity.class);
-            intent.putExtra("contactos_id", contactoId);
-            startActivity(intent);
+            if (dbHelper.hayContacto()){
+                Intent intent = new Intent(MenuContactoActivity.this, EliminarContactoActivity.class);
+                intent.putExtra("contactos_id", contactoId);
+                startActivity(intent);
+            } else {
+                Toast.makeText(this, "No hay contactos agregados!", Toast.LENGTH_SHORT).show();
+            }
+
         });
 
         // Volver al Menu

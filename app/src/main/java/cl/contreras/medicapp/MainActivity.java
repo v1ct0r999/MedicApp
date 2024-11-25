@@ -154,7 +154,7 @@ public class MainActivity extends AppCompatActivity {
                 alarmaButton.setText(nombre + "\n\nVer detalles");
                 LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
                         LinearLayout.LayoutParams.MATCH_PARENT,
-                        300
+                        400
                 );
                 params.setMargins(0, 20, 0, 20); // Margen superior e inferior de 20px
                 alarmaButton.setLayoutParams(params);

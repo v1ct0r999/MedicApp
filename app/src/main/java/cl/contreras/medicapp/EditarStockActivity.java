@@ -45,7 +45,7 @@ public class EditarStockActivity extends AppCompatActivity {
         // Acción del botón Aceptar
         buttonAceptarStock.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+             public void onClick(View v) {
                 // Obtener el valor ingresado por el usuario
                 String nuevoStock = editTextNuevoStock.getText().toString().trim();
 
@@ -53,7 +53,7 @@ public class EditarStockActivity extends AppCompatActivity {
                 if (nuevoStock.isEmpty()) {
                     Toast.makeText(EditarStockActivity.this, "Por favor ingrese un nuevo stock.", Toast.LENGTH_SHORT).show();
                 } else {
-                    // Llamar a la función para actualizar la dosis en la base de datos
+                    // Llamar a la función para actualizar la stcok en la base de datos
                     actualizarstock(nuevoStock);
                 }
             }

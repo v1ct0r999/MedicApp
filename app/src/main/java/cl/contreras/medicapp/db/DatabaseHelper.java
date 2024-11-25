@@ -90,7 +90,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return result != -1;
     }
 
-    private boolean hayContacto() {
+    public boolean hayContacto() {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.query(TABLE_CONTACTOS, null, null, null, null, null, null);
         boolean existe = (cursor != null && cursor.getCount() > 0);

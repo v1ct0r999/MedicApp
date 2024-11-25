@@ -206,7 +206,7 @@
                 android:text="Editar Numero"
                 android:textSize="25dp"
                 android:textStyle="bold"
-                android:textColor="@android:color/black"
+                android:textColor="@color/black"
                 android:backgroundTint="@color/cyan"/>
         </RelativeLayout>
 
